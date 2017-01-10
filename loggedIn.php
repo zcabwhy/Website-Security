@@ -12,4 +12,6 @@
       echo "logged in as ";
       echo $name; ?>
     <a href = "logOut.php">sign out</a>
+    <body>
+    </body>
 </html>

@@ -35,7 +35,8 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
      // output data of each row
      while($row = mysqli_fetch_assoc($result)) {
-         echo "<tr><th style='width: 175px;text-align:center;'>" . $row["name"]. "</th><td style='text-align:left;'>" . $row["message"]. "</td></tr>";
+       $linkname = $row['name'];
+       echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</th><td style='text-align:left;'>" . $row["message"]. "</td></tr>";
      }
 } else {
      echo "0 results";
