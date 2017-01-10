@@ -58,14 +58,19 @@
    }
 ?>
 <html>
+<head>
+  <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
+</head>
 <body>
 
 <h1>File Uploading</h1>
 
-<h2>Files in Server</h1>
+<h2>Files in Account</h1>
 
 <?php
-  $files = scandir( "uploads" );
+  //Use Session name to find folder and display files in folder
+  $dir = "uploads";
+  $files = scandir($dir);
   echo '<ul>';
   foreach( $files as $file ){
     if(($file != ".")&&($file != "..")){
@@ -78,6 +83,7 @@
 <h2>Upload file</h2>
 
 <form action="" method="POST" enctype="multipart/form-data">
+    <!--Upload file form.-->
     <input type="file" name="file" />
     <input type="submit"/>
 
@@ -89,6 +95,9 @@
     </ul>
 </form>
 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      
+<script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 
 </body>
