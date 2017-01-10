@@ -34,7 +34,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th style="text-align: left;">Messages (Most Recent)</th>
+            <th style="text-align: left;">Snippets (Starting with Most Recent)</th>
           </tr>
         </thead>
         <tbody>

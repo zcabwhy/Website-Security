@@ -1,12 +1,39 @@
-<!DOCTYPE HTML>
-<!-- Copyright 2010 Google Inc. -->
+<?php
+  session_start();
+  $name = $_SESSION["name"];
+?>
+<!DOCTYPE html>
 <html>
 <head>
-<title>New Snippet</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
+  <title>Snippets</title>
+  <link href="style.css" rel="stylesheet">
 </head>
-
 <body>
-
+  <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.php">Snippets</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav pull-right">
+          <li>
+            <a href="profile.php">Logged in as <?php echo $name; ?></a>
+          </li>
+          <li>
+            <a href="snippets.php">Snippets</a>
+          </li>
+          <li>
+            <a href="fileupload.php">Storage</a>
+          </li>
+          <li>
+            <a href="logOut.php">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 <h2>New Snippet</h2>
 <h3>Add a new snippet.</h3>
 
