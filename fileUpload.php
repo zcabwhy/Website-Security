@@ -69,6 +69,10 @@
 
 <?php
   //Use Session name to find folder and display files in folder
+  // $userDir = $_SESSION["name"];
+  // if(empty(scandir($userDir))) {
+  //   mkdir($userDir);
+  // }
   $dir = "uploads";
   $files = scandir($dir);
   echo '<ul>';
