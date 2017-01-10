@@ -13,8 +13,8 @@
           <h2 class="">Sign-in</h2>
         </div>
         <form action="confirmSignin.php" method="post" autocomplete="off">
-          <input type="text" name="name" class="form-control" placeholder="Name"><br>
-          <input type="password" name="password" class="form-control" placeholder="Password"><br>
+          <input type="text" name="name" class="form-control" placeholder="Name" required><br>
+          <input type="password" name="password" class="form-control" placeholder="Password" required><br>
           <input type="submit" class="btn btn-block btn-primary">
         </form>
       </div>
