@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>BLOG_APP</title>
-  <head>
-    <a href = "register.php">sign up account</a>
-    <a href = "signin.php">sign in</a>
-</html>
+<?php
+  session_start();
+  if(!empty($_SESSION["name"])){
+    header("Location: loggedIn.php");
+  }else{
+    header("Location: notLogged.php");
+  }
+?>

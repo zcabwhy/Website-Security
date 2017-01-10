@@ -8,7 +8,7 @@
   if(checkPass($servername, $dbusername, $dbpassword, $name, $password)){
     session_start();
     $_SESSION["name"] = $name;
-    print "password correct";
+    header("Location: index.php"); 
 
   }else{
     header("Location: signin.php");
