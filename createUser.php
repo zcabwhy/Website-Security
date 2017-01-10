@@ -6,14 +6,18 @@
   $dbusername = "root";
   $dbpassword = "root";
 
-
   $conn = new PDO("mysql:host=$servername;dbname=blog_app", $dbusername, $dbpassword);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sql = "INSERT INTO users (name , password) VALUES ('$name', '$password')";
-  $conn->exec($sql);
+  $search = "SELECT * FROM users WHERE name = '$name'";
+  $result = $conn->query($search)->fetchAll();
+  $countResult = count($result);
+  if($countResult == 0){
+    $sql = "INSERT INTO users (name , password) VALUES ('$name', '$password')";
+    $conn->exec($sql);
 
-  $_SESSION["name"] = $name;
+    $_SESSION["name"] = $name;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +26,17 @@
     <meta charset="utf-8">
     <title>Account Created</title>
   <head>
-    <p> Account Created</p>
-    <a href = "index.php">"Back to home page"</a>
+  <body>
+    <?php
+    if($countResult == 0){
+      echo "<p>Account Created</p>";
+      echo '<a href = "index.php">Go to main page</a>';
+    }else{
+      echo "<p>Name already exists</p>";
+      echo '<a href = "register.php">Go back to Sign up</a>';
+    }
+    ?>
+  </body>
 </html>
 
 
