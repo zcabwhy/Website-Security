@@ -1,29 +1,37 @@
 <?php
+  $servername = "localhost:8889";
+  $name = $_POST["name"];
+  $password = $_POST["password"];
+  $dbusername = "root";
+  $dbpassword = "root";
 
-$name = "Bart";
-$pw = "bartman";
+  if(checkPass($servername, $dbusername, $dbpassword, $name, $password)){
+    session_start();
+    $_SESSION["name"] = $name;
+    print "password correct";
 
-if (is_correct_password($name, $pw)) {
-	# redirect?
-	session_start();
-	print "succesfful";
-} else {
-	print "--,.--;;;;;;;;;";
-}
-
-
-function is_correct_password($name, $pw) {
-	$db = new PDO("mysql:dbname=blog_app", "root", "");
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$rows = $db->query("SELECT password FROM users WHERE name = '$name'");
-	foreach ($rows as $row) {
-		$correct_password = $row["password"];
-		if ($pw == $correct_password) {
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
+  }else{
+    header("Location: signin.php");
+  }
 
 
- ?>
+  function checkPass($servername, $dbusername, $dbpassword, $username, $pw){
+    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $dbusername, $dbpassword);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "SELECT password FROM users WHERE name = '$username'";
+    $rows = $conn->query($sql);
+    foreach($rows as $row){
+      $cpass = $row["password"];
+      if($pw == $cpass){
+        return TRUE;
+      }
+    }
+
+    return FALSE;
+  }
+
+
+
+
+?>
