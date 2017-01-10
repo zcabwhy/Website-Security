@@ -39,7 +39,7 @@ if (mysqli_num_rows($result) > 0) {
        echo "<tr><td style='text-align:left;'>" . $row["message"]. "</td></tr>";
      }
 } else {
-     echo "0 results";
+     echo "<tr><td>The user has posted no snippets!</td></tr>";
 }
 
 mysqli_close($conn);
