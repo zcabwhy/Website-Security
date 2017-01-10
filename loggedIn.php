@@ -21,6 +21,12 @@
             <a href="profile.php">Logged in as <?php echo $name; ?></a>
           </li>
           <li>
+            <a href="snippets.php">Snippets</a>
+          </li>
+          <li>
+            <a href="fileupload.php">Storage</a>
+          </li>
+          <li>
             <a href="logOut.php">Logout</a>
           </li>
         </ul>
@@ -29,7 +35,33 @@
   </nav>
   <div class="container">
     <div class="container-fluid text-center">
-      <h1>Current Members</h1>
+      <h2>Welcome <?php echo $name?> to Snippets!</h2>
+      <?php
+      $servername = "localhost:8889";
+      $username = "root";
+      $password = "root";
+      $dbname = "blog_app";
+
+      $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+      if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+
+      $sql = "SELECT name , password FROM users WHERE name = '$name'";
+      $result = mysqli_query($conn, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+          echo "<h3>User Link: </h3>";
+        }
+      } else {
+        echo "0 results";
+      }
+
+      mysqli_close($conn);
+      ?>
+      <h3>Current Members</h3>
       <div class="col-md-10 col-md-offset-1">
         <table class="table">
           <thead>
