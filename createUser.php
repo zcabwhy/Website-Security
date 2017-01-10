@@ -1,16 +1,20 @@
 <?php
+  $servername = "localhost:8889";
   $name = $_POST["name"];
   $password = $_POST["password"];
+  $dbusername = "root";
+  $dbpassword = "root";
   print "name = ";
   echo $name;
   echo "<br>";
   print "password = ";
   echo $password;
 
-  $db = new PDO("mysql:dbname=blog_app", "root", "");
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $exec = "INSERT INTO users VALUES ('$name', '$password')";
-  $db->exec($exec);
+  $conn = new PDO("mysql:host=$servername;dbname=blog_app", $dbusername, $dbpassword);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $sql = "INSERT INTO users (name , password) VALUES ('$name', '$password')";
+  $conn->exec($sql);
 
 ?>
 
