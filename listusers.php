@@ -3,13 +3,15 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
+    <div class="col-md-2 col-md-offset-5">
     <table class="table">
       <thead>
         <tr>
-          <th>Names</th>
+          <th style="text-align: center;">Names</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +60,7 @@ $conn = null;
 ?>
 </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>
