@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <h1>Sign up</h1>
-    <form action="createUser.php" method="post">
-        Name: <input type="text" name="name"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit">
-    </form>
-
 <head>
   <meta charset="utf-8">
   <title>Register</title>
