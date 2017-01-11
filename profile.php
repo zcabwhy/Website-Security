@@ -67,9 +67,7 @@
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Connected successfully";
-
     $sql = "SELECT iconURL FROM users WHERE name='$currentName'";
-
     foreach ($conn->query($sql) as $row) {
           print $row['iconURL'] . "\t";
       }
@@ -85,33 +83,26 @@
     <?php
        $newURL= $_POST["newURL"];
        $currentname = "Will";
-
        if(!empty($_POST["newURL"])) {
          $servername = "localhost:8889";
          $username = "root";
          $password = "root";
-
          // Create connection
         try {
           $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           echo "Connected successfully";
-
           $sql = "UPDATE users SET iconURL='$newURL' WHERE name='$currentname'";
-
           $stmt = $conn->prepare($sql);
-
           // execute the query
           $stmt->execute();
-
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
         }
         catch(PDOException $e) {
           echo "Connection failed: " . $e->getMessage();
         }
-
         $conn = null;
       }
     ?>
@@ -141,39 +132,31 @@
     <?php
        $newSnippet= $_POST["newSnippet"];
        $currentname = "Will";
-
        if(!empty($_POST["newSnippet"])) {
          $servername = "localhost:8889";
          $username = "root";
          $password = "root";
-
          // Create connection
         try {
           $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           echo "Connected successfully";
-
           $sql = "UPDATE users SET snippet='$newSnippet' WHERE name='$currentName'";
-
           $stmt = $conn->prepare($sql);
-
           // execute the query
           $stmt->execute();
-
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
         }
         catch(PDOException $e) {
           echo "Connection failed: " . $e->getMessage();
         }
-
         $conn = null;
       }
     ?>
 
     <!-- <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
     <script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 
   </div>
