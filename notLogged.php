@@ -61,7 +61,7 @@
                 echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
               }
             } else {
-              echo "0 results";
+              echo "There are no member! Be the first!";
             }
 
             mysqli_close($conn);
