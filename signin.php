@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
-  <title>Sign-in</title>
+  <title>Snippets</title>
   <link href="style.css" rel="stylesheet">
 <head>
 <body>
@@ -30,10 +30,13 @@
         <?php
         if ($_GET['status'] == "loggedout"){
           echo "<div class = 'alert alert-success'>Successfully logged out!</div>";
+        } else if ($_GET['status'] == "badlogin"){
+          echo "<div class = 'alert alert-danger'>Incorrect username or password!</div>";
+
         }
         ?>
         <form action="confirmSignin.php" method="post" autocomplete="off">
-          <input type="text" name="name" class="form-control" placeholder="Name" required><br>
+          <input type="text" name="name" class="form-control" placeholder="Username" required><br>
           <input type="password" name="password" class="form-control" placeholder="Password" required><br>
           <input type="submit" class="btn btn-block btn-primary">
         </form>

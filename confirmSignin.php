@@ -8,10 +8,10 @@
   if(checkPass($servername, $dbusername, $dbpassword, $name, $password)){
     session_start();
     $_SESSION["name"] = $name;
-    header("Location: index.php"); 
+    header("Location: index.php");
 
   }else{
-    header("Location: signin.php");
+    header("Location: signin.php?status=badlogin");
   }
 
 
@@ -27,11 +27,6 @@
         return TRUE;
       }
     }
-
     return FALSE;
   }
-
-
-
-
 ?>
