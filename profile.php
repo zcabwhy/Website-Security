@@ -31,23 +31,19 @@
   </nav>
   <div class="container">
   <h1>Profile Page</h1>
-
   <?php
   if ($_GET['status'] == "success"){
     echo "<div class = 'alert alert-success'>Successfully saved settings!</div>";
   } else if ($_GET['status'] == "failure"){
     echo "<div class = 'alert alert-danger'>Error occurred!" . $_GET['error'] . "</div>";
-
   }
   ?>
-
   <h2>Change Username</h1>
-
-  <p> Current Username: <?php echo $name; ?></p>
-
   <form action="changename.php" method="post">
-    New Name: <input type="text" name="newName"><br>
-    <input type="submit">
+    <label>New Name</label>
+    <p> Current Username: <?php echo $name; ?></p>
+    <input type="text" class="form-control" name="newName"><br>
+    <input type="submit" class="btn btn-primary">
   </form>
   <h2>Change Password</h2>
 
