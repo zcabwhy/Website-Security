@@ -29,52 +29,26 @@
       </div>
     </div>
   </nav>
- <div class="container">
+  <div class="container">
   <h1>Profile Page</h1>
+
+  <?php
+  if ($_GET['status'] == "success"){
+    echo "<div class = 'alert alert-success'>Successfully saved settings!</div>";
+  } else if ($_GET['status'] == "failure"){
+    echo "<div class = 'alert alert-danger'>Error occurred!" . $_GET['error'] . "</div>";
+
+  }
+  ?>
 
   <h2>Change Username</h1>
 
   <p> Current Username: <?php echo $name; ?></p>
 
-  <form action="" method="post">
-  New Name: <input type="text" name="newName"><br>
-  <input type="submit">
+  <form action="changename.php" method="post">
+    New Name: <input type="text" name="newName"><br>
+    <input type="submit">
   </form>
-
-  <?php
-     $newName = $_POST["newName"];
-
-     if(!empty($_POST["newName"])) {
-       $servername = "localhost:8889";
-       $username = "root";
-       $password = "root";
-
-       // Create connection
-      try {
-        $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
-
-        $sql = "UPDATE users SET name='$newName' WHERE name='$name'";
-        $_SESSION["name"] = $newName;
-        $stmt = $conn->prepare($sql);
-
-        // execute the query
-        $stmt->execute();
-
-        // echo a message to say the UPDATE succeeded
-        echo $stmt->rowCount() . " records UPDATED successfully";
-      }
-      catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-      }
-
-      $conn = null;
-    }
-  ?>
-
-
   <h2>Change Password</h2>
 
   <p> Current Password: <?php
@@ -115,12 +89,8 @@
         $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
-
         $sql = "UPDATE users SET password='$newPassword' WHERE name='$currentName'";
-
         $stmt = $conn->prepare($sql);
-
         // execute the query
         $stmt->execute();
 
