@@ -1,7 +1,7 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["name"];
+  $name = $_SESSION["uid"];
   $newName = $_POST["newName"];
   if(!empty($_POST["newName"])) {
     try {

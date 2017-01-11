@@ -2,6 +2,12 @@
   include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
+  $profileid = $_GET['uid'];
+  if ($profileid == ''){
+    $profileid = $name;
+    $_SESSION["uid"] = $name;
+  }
+  else $_SESSION["uid"] = $_GET['uid'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +55,7 @@
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Connected successfully";
-    $sql = "SELECT iconURL FROM users WHERE name='$name'";
+    $sql = "SELECT iconURL FROM users WHERE name='$profileid'";
     foreach ($conn->query($sql) as $row) {
           // print '<label>';
           // echo "<div style='text-align:center; height:500px; width:500px;'>";
@@ -65,11 +71,11 @@
     // echo $name; ?></p>
 
 
-    <h2 style="text-align:center;"><?php echo "$name"; ?></h2>
+    <h2 style="text-align:center;"><?php echo "$profileid"; ?></h2>
 
     <h2>Change Username</h1>
     <form action="changename.php" method="post">
-      <p><label> Current Username:</label><?php echo " $name"; ?></p>
+      <p><label> Current Username:</label><?php echo " $profileid"; ?></p>
       <input type="text" class="form-control" name="newName"><br>
       <input type="submit" class="btn btn-primary">
     </form>
@@ -110,25 +116,71 @@
             print $row['snippet'];
             // print '</label>';
         }
-      $conn = null;?></p>
+      $conn = null;?>
+    </p>
 
 
-      <form action="changeSnippet.php" method="post">
-        <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
-        <!-- <input type="text" class="form-control" name="newName"><br> -->
-        <input type="submit" class="btn btn-primary">
-      </form>
+    <form action="changeSnippet.php" method="post">
+      <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
+      <!-- <input type="text" class="form-control" name="newName"><br> -->
+      <input type="submit" class="btn btn-primary">
+    </form>
 
+    <?php
+      $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+      if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+      $sql = "SELECT admin , author FROM users WHERE name = '" . $name . "'";
+      $result = mysqli_query($conn, $sql);
 
-    <!-- <form action="" method="post">
-    New Snippet: <textarea name='newSnippet' rows='5' style='width:100%'></textarea><br>
-    <input type="submit">
-    </form> -->
+      if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+          if ($row['admin'] == 1){
+            $sql = "SELECT admin , author FROM users WHERE name = '" . $profilename . "'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+              while($row = mysqli_fetch_assoc($result)) {
+                $admin = $row['admin'];
+                $author = $row['author'];
+              }
+            }
+            echo "<h2>Administrator</h2>
+            <form action='makeadmin.php' method='post'>
+              <fieldset id='group1'>
+                <label class='radio-inline'>
+                  <input type='radio' name='optradio' value=1" . (($admin==0)?" checked":"") . ">Yes
+                </label>
+                <label class='radio-inline'>
+                  <input type='radio' name='optradio' value=0" . (($admin==1)?" checked":"") . ">No
+                </label><br><br>
+              </fieldset>
+                <!-- <input type='text' class='form-control' name='newName'><br> -->
+                <input type='submit' class='btn btn-primary'>
+            </form>
 
-
-    <!-- <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
-
+            <h2>Author</h2>
+            <form action='' method='post'>
+              <fieldset id='group2'>
+                <label class='radio-inline'>
+                  <input type='radio' name='optradio' value=1" . (($author==0)?" checked":"") . ">Yes
+                </label>
+                <label class='radio-inline'>
+                  <input type='radio' name='optradio' value=0" . (($author==1)?" checked":"") . ">No
+                </label><br><br>
+              </fieldset>
+                <!-- <input type='text' class='form-control' name='newName'><br> -->
+                <input type='submit' class='btn btn-primary'>
+            </form><br>";
+          } else {
+            echo "<br>";
+          }
+        }
+      } else {
+        echo "<tr><td>The user has posted no snippets!</td></tr>";
+      }
+      mysqli_close($conn);
+    ?>
   </div>
 </body>
 </html>

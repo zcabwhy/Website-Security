@@ -1,7 +1,7 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["name"];
+  $name = $_SESSION["uid"];
   $currentPassword = $_POST["currentPassword"];
   $newPassword = $_POST["newPassword"];
   if(!empty($_POST["currentPassword"]) || !empty($_POST["newPassword"])) {
