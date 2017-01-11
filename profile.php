@@ -58,7 +58,7 @@
     </form>
 
     <h2>Change Icon URL</h2>
-    <p> <label>Current Icon URL: </label><?php
+    <p><label>Current Icon URL:&nbsp</label><?php
     // $currentname = "Will";
     $servername = "localhost:8889";
     $username = "root";
@@ -69,17 +69,17 @@
     // echo "Connected successfully";
     $sql = "SELECT iconURL FROM users WHERE name='$name'";
     foreach ($conn->query($sql) as $row) {
-          print '<label>';
-          print $row['iconURL'] . "\t";
-          print '</label>';
+          // print '<label>';
+          print $row['iconURL'];
+          // print '</label>';
       }
     $conn = null;
     // $name = "Icon URL";
     // echo $name; ?></p>
-    
+
     <form action="changeIconURL.php" method="post">
       <label>New Icon URL</label>
-      <input type="password" class="form-control" name="newURL"><br>
+      <input type="text" class="form-control" name="newURL"><br>
       <input type="submit" class="btn btn-primary">
     </form>
 <!--
@@ -102,9 +102,9 @@
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $sql = "SELECT snippet FROM users WHERE name='$name'";
       foreach ($conn->query($sql) as $row) {
-            print '<label>';
-            print $row['snippet'] . "\t";
-            print '</label>';
+            // print '<label>';
+            print $row['snippet'];
+            // print '</label>';
         }
       $conn = null;?></p>
 
