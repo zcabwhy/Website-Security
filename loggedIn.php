@@ -1,4 +1,5 @@
 <?php
+  include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
 ?>
@@ -37,12 +38,8 @@
     <div class="container-fluid text-center">
       <h2>Welcome <?php echo $name?> to Snippets!</h2>
       <?php
-      $servername = "localhost:8889";
-      $username = "root";
-      $password = "root";
-      $dbname = "blog_app";
 
-      $conn = mysqli_connect($servername, $username, $password, $dbname);
+      $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -72,12 +69,7 @@
           </thead>
           <tbody>
             <?php
-            $servername = "localhost:8889";
-            $username = "root";
-            $password = "root";
-            $dbname = "blog_app";
-
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());

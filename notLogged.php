@@ -37,34 +37,31 @@
           </thead>
           <tbody>
             <?php
-            $servername = "localhost:8889";
-            $username = "root";
-            $password = "root";
-            $dbname = "blog_app";
+              include 'dbconnection.php';
 
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+              $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
-            if (!$conn) {
-              die("Connection failed: " . mysqli_connect_error());
-            }
-
-            $sql = "SELECT * FROM ( SELECT u.name , m.message , id FROM users as u Left JOIN messages as m ON m.name = u.name ORDER BY id DESC) AS temp GROUP BY name ORDER BY name";
-            $result = mysqli_query($conn, $sql);
-
-            if (mysqli_num_rows($result) > 0) {
-              while($row = mysqli_fetch_assoc($result)) {
-                $linkname = $row['name'];
-                $message = $row['message'];
-                if ($message == NULL){
-                  $message = "<i>The user hasn't posted a snippet yet!</i>";
-                }
-                echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
+              if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
               }
-            } else {
-              echo "There are no member! Be the first!";
-            }
 
-            mysqli_close($conn);
+              $sql = "SELECT * FROM ( SELECT u.name , m.message , id FROM users as u Left JOIN messages as m ON m.name = u.name ORDER BY id DESC) AS temp GROUP BY name ORDER BY name";
+              $result = mysqli_query($conn, $sql);
+
+              if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                  $linkname = $row['name'];
+                  $message = $row['message'];
+                  if ($message == NULL){
+                    $message = "<i>The user hasn't posted a snippet yet!</i>";
+                  }
+                  echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
+                }
+              } else {
+                echo "There are no member! Be the first!";
+              }
+
+              mysqli_close($conn);
             ?>
           </tbody>
         </table>

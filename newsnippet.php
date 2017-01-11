@@ -1,4 +1,5 @@
 <?php
+  include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
 ?>

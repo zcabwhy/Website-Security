@@ -1,14 +1,12 @@
 <?php
+  include 'dbconnection.php';
   session_start();
-  $servername = "localhost:8889";
   $name = $_POST["name"];
   $password = $_POST["password"];
-  $dbusername = "root";
-  $dbpassword = "root";
   $countResult = "";
 
   try{
-    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $dbusername, $dbpassword);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $search = "SELECT * FROM users WHERE name = '$name'";
@@ -17,8 +15,6 @@
     if($countResult == 0){
       $sql = "INSERT INTO users (name , password) VALUES ('$name', '$password')";
       $conn->exec($sql);
-
-      $_SESSION["name"] = $name;
     }
     $conn = null;
   }catch(PDOException $e) {

@@ -1,11 +1,8 @@
 <?php
-  $servername = "localhost:8889";
-  $username = "root";
-  $password = "root";
-  $dbname = "blog_app";
+  include 'dbconnection.php';
 
   // Create database
-  $conn = new mysqli($servername, $username, $password);
+  $conn = new mysqli($servername, $dbusername, $dbpassword);
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
   }
@@ -26,7 +23,7 @@
   }
 
   //Create tables
-  $conn = new mysqli($servername, $username, $password, $dbname);
+  $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
   }

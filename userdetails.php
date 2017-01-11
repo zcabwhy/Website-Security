@@ -1,4 +1,5 @@
 <?php
+  include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
 ?>
@@ -40,14 +41,10 @@
         </thead>
         <tbody>
           <?php
-          $servername = "localhost:8889";
-          $username = "root";
-          $password = "root";
-          $dbname = "blog_app";
 
           $linkname = $_GET['linkname'];
 
-          $conn = mysqli_connect($servername, $username, $password, $dbname);
+          $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
 
           if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());

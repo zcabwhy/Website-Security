@@ -7,7 +7,6 @@
     session_start();
     $_SESSION["name"] = $name;
     header("Location: index.php");
-
   }else{
     header("Location: signin.php?status=badlogin");
   }

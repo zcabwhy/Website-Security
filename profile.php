@@ -1,4 +1,5 @@
 <?php
+  include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
 ?>
@@ -44,10 +45,7 @@
 
     <p><?php
     // $currentname = "Will";
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
-    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Connected successfully";
@@ -104,11 +102,7 @@
     <h2>Change Private Snippet</h2>
 
     <p> <label>Current Private Snippet:</label> <?php
-      $currentname = "Will";
-      $servername = "localhost:8889";
-      $username = "root";
-      $password = "root";
-      $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
+      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $sql = "SELECT snippet FROM users WHERE name='$name'";
       foreach ($conn->query($sql) as $row) {
