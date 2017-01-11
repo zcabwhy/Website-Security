@@ -1,7 +1,18 @@
 <?php
   include 'dbconnection.php';
-  $name = $_POST["name"];
-  $password = $_POST["password"];
+
+  $uid = $_GET['uid'];
+  $pw = $_GET['pw'];
+  if ($uid==''){
+    $name = $_POST["name"];
+  } else {
+    $name = $uid;
+  }
+  if ($pw==''){
+    $password = $_POST["password"];
+  } else {
+    $password = $pw;
+  }
 
   if(checkPass($servername, $dbusername, $dbpassword, $dbname, $name, $password)){
     session_start();

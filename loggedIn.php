@@ -50,10 +50,9 @@
 
       if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-          echo "<h3>User Link: </h3>";
+
+          echo "<h3>User Link</h3><h4>http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "?uid=" . $row['name'] . "&pw=" . $row['password'] . "</h4>";
         }
-      } else {
-        echo "0 results";
       }
 
       mysqli_close($conn);
