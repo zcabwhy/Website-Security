@@ -2,7 +2,11 @@
   session_start();
   $name = $_SESSION["name"];
 
-   if(isset($_FILES['file'])){
+  if (!file_exists("uploads")){
+    mkdir("uploads");
+  }
+
+  if(isset($_FILES['file'])){
        $errors= array();
        $file_name = $_FILES['file']['name'];
        $file_size =$_FILES['file']['size'];
