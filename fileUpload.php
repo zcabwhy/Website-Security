@@ -7,56 +7,22 @@
   }
 
   if(isset($_FILES['file'])){
-       $errors= array();
-       $file_name = $_FILES['file']['name'];
-       $file_size =$_FILES['file']['size'];
-       $file_tmp =$_FILES['file']['tmp_name'];
-       $file_type=$_FILES['file']['type'];
-       $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
-
-      //  $expensions= array("html");
-       //
-      //  if(in_array($file_ext,$expensions)=== false){
-      //      $errors[]="extension not allowed, please choose a file.";
-      //  }
-
-      //  if($file_size > 2097152){
-      //      $errors[]='File size must be excately 2 MB';
-      //  }
-
-       if(empty($errors)==true){
-          //  $target_dir = "uploads/";
-          //  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-          //  $uploadOk = 1;
-          //  $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
-           move_uploaded_file($file_tmp,"uploads/" . $name . "/" .$file_name);
-           echo "Success";
-          //  $dir = "/Users/Applications/MAMP/htdocs/uploads";
-           // Sort in ascending order
-          //  `$a = scandir($dir);
-          //  print_r($a);`
-//           if (is_dir($dir)){
-//   if ($dh = opendir($dir)){
-//     while (($file = readdir($dh)) !== false){
-//       echo "filename:" . $file . "<br>";
-//     }
-//     closedir($dh);
-//   }
-// }
-      //  }
-        // $files = scandir("/htdocs");
-        // foreach( $files as $file ){
-        //   echo $file . "<br />";
-        // }
-//         $files = scandir( "MY_DIRECTORY" );
-// foreach( $files as $file ){
-//    echo $file . "<br />";
-// }
-      }
-      else{
-           print_r($errors);
-       }
-   }
+    $errors= array();
+    $file_name = $_FILES['file']['name'];
+    $file_size =$_FILES['file']['size'];
+    $file_tmp =$_FILES['file']['tmp_name'];
+    $file_type=$_FILES['file']['type'];
+    $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
+    if(empty($errors)==true){
+       move_uploaded_file($file_tmp,"uploads/" . $name . "/" .$file_name);
+       $fileMoveStatus = true;
+       //echo "Success";
+    }
+    else{
+      $fileMoveStatus = false;
+      print_r($errors);
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html>

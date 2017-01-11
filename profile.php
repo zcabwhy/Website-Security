@@ -48,25 +48,6 @@
       <input type="submit" class="btn btn-primary">
     </form>
     <h2>Change Password</h2>
-
-    <p> Current Password: <?php
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
-    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
-
-    $sql = "SELECT password FROM users WHERE name='$name'";
-
-    // print_r($conn->query($sql));
-
-    foreach ($conn->query($sql) as $row) {
-          echo $row['password'];
-    }
-    $conn = null;?></p>
-
     <form action="changepassword.php" method="post">
       <label>Current Password</label>
       <input type="password" class="form-control" name="currentPassword"><br>
