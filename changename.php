@@ -19,5 +19,7 @@
       header("Location: profile.php?status=failure&error=" . $e->getMessage());
     }
     $conn = null;
+  } else {
+    header("Location: profile.php?status=failure");
   }
-  ?>
+?>

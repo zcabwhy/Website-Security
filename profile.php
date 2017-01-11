@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="style.css" rel="stylesheet">
+  <title>Snippets</title>
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
@@ -34,21 +35,21 @@
   <?php
   if ($_GET['status'] == "success"){
     echo "<div class = 'alert alert-success'>Successfully saved settings!</div>";
+  } else if ($_GET['status'] == "failure" && $_GET['error'] == "incorrectpassword"){
+    echo "<div class = 'alert alert-danger'>Error occurred! Incorrect password was entered. Try again.</div>";
   } else if ($_GET['status'] == "failure"){
     echo "<div class = 'alert alert-danger'>Error occurred!" . $_GET['error'] . "</div>";
   }
   ?>
   <h2>Change Username</h1>
   <form action="changename.php" method="post">
-    <label>New Name</label>
-    <p> Current Username: <?php echo $name; ?></p>
+    <p><label> Current Username:</label><?php echo " $name"; ?></p>
     <input type="text" class="form-control" name="newName"><br>
     <input type="submit" class="btn btn-primary">
   </form>
   <h2>Change Password</h2>
 
   <p> Current Password: <?php
-  $currentname = "Will";
   $servername = "localhost:8889";
   $username = "root";
   $password = "root";
@@ -57,7 +58,7 @@
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   // echo "Connected successfully";
 
-  $sql = "SELECT password FROM users WHERE name='$currentname'";
+  $sql = "SELECT password FROM users WHERE name='$name'";
 
   // print_r($conn->query($sql));
 
@@ -66,14 +67,16 @@
   }
   $conn = null;?></p>
 
-  <form action="" method="post">
-  New Password: <input type="text" name="newPassword"><br>
-  <input type="submit">
+  <form action="changepassword.php" method="post">
+    <label>Current Password</label>
+    <input type="password" class="form-control" name="currentPassword"><br>
+    <label>New Password</label>
+    <input type="password" class="form-control" name="newPassword"><br>
+    <input type="submit" class="btn btn-primary">
   </form>
 
   <?php
      $newPassword= $_POST["newPassword"];
-     $currentName = "Will";
 
      if(!empty($_POST["newPassword"])) {
        $servername = "localhost:8889";
@@ -85,7 +88,7 @@
         $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE users SET password='$newPassword' WHERE name='$currentName'";
+        $sql = "UPDATE users SET password='$newPassword' WHERE name='$came'";
         $stmt = $conn->prepare($sql);
         // execute the query
         $stmt->execute();
