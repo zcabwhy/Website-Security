@@ -30,6 +30,7 @@
     </div>
   </nav>
   <div class="container">
+    <h2><center><?php echo $_GET['linkname'] ?></center></h2>
     <div class="col-md-6 col-md-offset-3">
       <table class="table">
         <thead>
