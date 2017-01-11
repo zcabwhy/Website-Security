@@ -27,6 +27,11 @@
         <div class="form-group">
           <h2 class="">Sign-in</h2>
         </div>
+        <?php
+        if ($_GET['status'] == "loggedout"){
+          echo "<div class = 'alert alert-success'>Successfully logged out!</div>";
+        }
+        ?>
         <form action="confirmSignin.php" method="post" autocomplete="off">
           <input type="text" name="name" class="form-control" placeholder="Name" required><br>
           <input type="password" name="password" class="form-control" placeholder="Password" required><br>
