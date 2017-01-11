@@ -32,7 +32,6 @@
           echo "<div class = 'alert alert-success'>Account created! Please sign in.</div>";
         } else if ($_GET['status'] == "alreadyexists"){
           echo "<div class = 'alert alert-warning'>Username already exists</div>";
-
         }
         ?>
         <form action="createUser.php" method="post" autocomplete="off">
