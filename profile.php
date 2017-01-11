@@ -54,9 +54,12 @@
     $sql = "SELECT iconURL FROM users WHERE name='$name'";
     foreach ($conn->query($sql) as $row) {
           // print '<label>';
-          echo "<div style='text-align:center;'>";
-          echo "<img src={$row['iconURL']}/>";
-          echo "</div>";
+          // echo "<div style='text-align:center; height:500px; width:500px;'>";
+          // echo $row['iconURL'];
+          echo "<img style='display: block;
+    margin-left: auto;
+    margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
+          // echo "</div>";
           // print '</label>';
       }
     $conn = null;
