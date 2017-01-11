@@ -131,13 +131,13 @@
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
-      $sql = "SELECT admin , author FROM users WHERE name = '" . $name . "'";
+      $sql = "SELECT admin FROM users WHERE name = '" . $name . "'";
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
           if ($row['admin'] == 1){
-            $sql = "SELECT admin , author FROM users WHERE name = '" . $profilename . "'";
+            $sql = "SELECT admin , author FROM users WHERE name = '" . $profileid . "'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)) {
@@ -149,27 +149,25 @@
             <form action='makeadmin.php' method='post'>
               <fieldset id='group1'>
                 <label class='radio-inline'>
-                  <input type='radio' name='optradio' value=1" . (($admin==0)?" checked":"") . ">Yes
+                  <input type='radio' name='optradio' value=1" . (($admin==1)?' checked':'') . ">Yes
                 </label>
                 <label class='radio-inline'>
-                  <input type='radio' name='optradio' value=0" . (($admin==1)?" checked":"") . ">No
+                  <input type='radio' name='optradio' value=0" . (($admin==0)?' checked':'') . ">No
                 </label><br><br>
               </fieldset>
-                <!-- <input type='text' class='form-control' name='newName'><br> -->
                 <input type='submit' class='btn btn-primary'>
             </form>
 
             <h2>Author</h2>
-            <form action='' method='post'>
+            <form action='makeauthor.php' method='post'>
               <fieldset id='group2'>
                 <label class='radio-inline'>
-                  <input type='radio' name='optradio' value=1" . (($author==0)?" checked":"") . ">Yes
+                  <input type='radio' name='optradio' value=1" . (($author==1)?' checked':'') . ">Yes
                 </label>
                 <label class='radio-inline'>
-                  <input type='radio' name='optradio' value=0" . (($author==1)?" checked":"") . ">No
+                  <input type='radio' name='optradio' value=0" . (($author==0)?' checked':'') . ">No
                 </label><br><br>
               </fieldset>
-                <!-- <input type='text' class='form-control' name='newName'><br> -->
                 <input type='submit' class='btn btn-primary'>
             </form><br>";
           } else {
