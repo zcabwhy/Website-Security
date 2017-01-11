@@ -35,7 +35,7 @@
 
         }
         ?>
-        <form action="confirmSignin.php" method="post" autocomplete="off">
+        <form action="login.php" method="post" autocomplete="off">
           <input type="text" name="name" class="form-control" placeholder="Username" required><br>
           <input type="password" name="password" class="form-control" placeholder="Password" required><br>
           <input type="submit" class="btn btn-block btn-primary">
