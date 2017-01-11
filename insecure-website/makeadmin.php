@@ -1,12 +1,12 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  
+
   $name = $_SESSION["uid"];
 
-  if(isset($_POST['optradio']))
+  if(isset($_GET['optradio']))
   {
-    $selected_radio = $_POST['optradio'];
+    $selected_radio = $_GET['optradio'];
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
