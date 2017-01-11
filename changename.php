@@ -3,11 +3,7 @@
   session_start();
   $name = $_SESSION["uid"];
   $newName = $_POST["newName"];
-
   if(!empty($_POST["newName"])) {
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
 
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
