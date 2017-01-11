@@ -1,14 +1,12 @@
 <?php
+  include 'dbconnection.php';
   session_start();
   $name = $_SESSION["name"];
   $currentPassword = $_POST["currentPassword"];
   $newPassword = $_POST["newPassword"];
   if(!empty($_POST["currentPassword"]) || !empty($_POST["newPassword"])) {
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
     try {
-      $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
+      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
       $sql = "SELECT password FROM users WHERE name = '$name'";
