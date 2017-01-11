@@ -41,6 +41,31 @@
       echo "<div class = 'alert alert-danger'>Error occurred!" . $_GET['error'] . "</div>";
     }
     ?>
+
+    <p><?php
+    // $currentname = "Will";
+    $servername = "localhost:8889";
+    $username = "root";
+    $password = "root";
+    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "Connected successfully";
+    $sql = "SELECT iconURL FROM users WHERE name='$name'";
+    foreach ($conn->query($sql) as $row) {
+          // print '<label>';
+          echo "<div style='text-align:center;'>";
+          echo "<img src={$row['iconURL']}/>";
+          echo "</div>";
+          // print '</label>';
+      }
+    $conn = null;
+    // $name = "Icon URL";
+    // echo $name; ?></p>
+
+
+    <h2 style="text-align:center;"><?php echo "$name"; ?></h2>
+
     <h2>Change Username</h1>
     <form action="changename.php" method="post">
       <p><label> Current Username:</label><?php echo " $name"; ?></p>
@@ -58,24 +83,6 @@
     </form>
 
     <h2>Change Icon URL</h2>
-    <p><label>Current Icon URL:&nbsp</label><?php
-    // $currentname = "Will";
-    $servername = "localhost:8889";
-    $username = "root";
-    $password = "root";
-    $conn = new PDO("mysql:host=$servername;dbname=blog_app", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
-    $sql = "SELECT iconURL FROM users WHERE name='$name'";
-    foreach ($conn->query($sql) as $row) {
-          // print '<label>';
-          print $row['iconURL'];
-          // print '</label>';
-      }
-    $conn = null;
-    // $name = "Icon URL";
-    // echo $name; ?></p>
 
     <form action="changeIconURL.php" method="post">
       <label>New Icon URL</label>
