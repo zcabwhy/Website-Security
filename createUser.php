@@ -18,33 +18,9 @@
 
     $_SESSION["name"] = $name;
   }
+  if($countResult == 0){
+    header("Location: register.php?status=success");
+  }else{
+    header("Location: register.php?status=alreadyexists");
+  }
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Account Created</title>
-  <head>
-  <body>
-    <?php
-    if($countResult == 0){
-      echo "<p>Account Created</p>";
-      echo '<a href = "index.php">Go to main page</a>';
-    }else{
-      echo "<p>Name already exists</p>";
-      echo '<a href = "register.php">Go back to Sign up</a>';
-    }
-    ?>
-  </body>
-</html>
-
-
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>check xss</title>
-  <head>
-  <body>
-    <!- <ー?php echo htmlspecialchars($_POST['name']); ?> -->
