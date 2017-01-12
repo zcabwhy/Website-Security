@@ -12,6 +12,10 @@
       $_SESSION["name"] = $newName;
       $stmt = $conn->prepare($sql);
       $stmt->execute();
+      $dir = "uploads/" . $name;
+      if (file_exists($dir)){
+        rename("uploads/" . $name . "/" , "uploads/" . $newName . "/");
+      }
       header("Location: profile.php?status=success");
     }
     catch(PDOException $e) {
