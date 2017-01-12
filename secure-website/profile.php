@@ -60,9 +60,9 @@
           // print '<label>';
           // echo "<div style='text-align:center; height:500px; width:500px;'>";
           // echo $row['iconURL'];
-          echo "<img style='display: block;
-    margin-left: auto;
-    margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
+          if ($row['iconURL'] != ''){
+            echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
+          }
           // echo "</div>";
           // print '</label>';
       }
@@ -146,7 +146,7 @@
               }
             }
             echo "<h2>Administrator</h2>
-            <form action='makeadmin.php' method='post'>
+            <form action='makeadmin.php' method='get'>
               <fieldset id='group1'>
                 <label class='radio-inline'>
                   <input type='radio' name='optradio' value=1" . (($admin==1)?' checked':'') . ">Yes
@@ -159,7 +159,7 @@
             </form>
 
             <h2>Author</h2>
-            <form action='makeauthor.php' method='post'>
+            <form action='makeauthor.php' method='get'>
               <fieldset id='group2'>
                 <label class='radio-inline'>
                   <input type='radio' name='optradio' value=1" . (($author==1)?' checked':'') . ">Yes
