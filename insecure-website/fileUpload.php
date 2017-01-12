@@ -6,7 +6,6 @@
   if (!file_exists("uploads")){
     mkdir("uploads");
   }
-
   if(isset($_FILES['file'])){
     $errors= array();
     $file_name = $_FILES['file']['name'];
