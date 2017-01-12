@@ -12,6 +12,9 @@
       $_SESSION["name"] = $newName;
       $stmt = $conn->prepare($sql);
       $stmt->execute();
+      $sql = "UPDATE messages SET name='$newName' WHERE name='$name'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
       $dir = "uploads/" . $name;
       if (file_exists($dir)){
         rename("uploads/" . $name . "/" , "uploads/" . $newName . "/");
