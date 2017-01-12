@@ -58,7 +58,6 @@
           <div class="form-group">
             <textarea name='snippet' class="form-control" id="exampleTextarea" rows="3" placeholder=<?php echo (($author==0)?'"You are do not have permission to make a snippet!" disabled':'"Add a new snippet"');?>></textarea>
           </div>
-          <i>Limited HTML is now supported in snippets (e.g., &lt;b&gt;, &lt;i&gt; etc.)!</i><hr>
           <?php echo (($author==1)?'<input type="submit" class="btn btn-block btn-primary">':'');?>
         </form>
       </div>
