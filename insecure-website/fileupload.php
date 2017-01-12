@@ -87,7 +87,7 @@
           <li>Sent file: <?php echo $_FILES['file']['name'];  ?>
           <li>File size: <?php echo $_FILES['file']['size'];  ?>
           <li>File type: <?php echo $_FILES['file']['type'] ?>
-          <li>File URL: <?php echo '<a href="http://localhost:8888/uploads/' . $name . "/" . $_FILES['file']['name'] . '">' . $_FILES['file']['name'] . '</a>' ?>
+          <li>File URL: <?php echo '<a href="http://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $name . "/" . $_FILES['file']['name'] . '">' . $_FILES['file']['name'] . '</a>' ?>
       </ul>
     </form>
     <h2>Files in Account</h1>
@@ -100,7 +100,7 @@
         echo '<ul>';
         foreach( $files as $file ){
           if(($file != ".")&&($file != "..")){
-           echo '<li><a href="http://localhost:8888/uploads/' . $file . '">' . $file . '</a></br>';
+           echo '<li><a href="http://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $name . '/' . $file . '">' . $file . '</a></br>';
          }
         }
         echo '</ul>';
