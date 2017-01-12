@@ -31,7 +31,7 @@
     name varchar(32) PRIMARY KEY,
     password varchar(16) default null,
     iconURL varchar(500) default null,
-    snippet varchar(64) not null,
+    snippet varchar(64) default null,
     admin boolean not null default 0,
     author boolean not null default 1
   )";
