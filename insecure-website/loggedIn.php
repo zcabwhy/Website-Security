@@ -74,6 +74,8 @@
               die("Connection failed: " . mysqli_connect_error());
             }
 
+            $sql = "SET sql_mode = ''";
+            mysqli_query($conn, $sql);
             $sql = "SELECT * FROM ( SELECT u.name , m.message , id FROM users as u Left JOIN messages as m ON m.name = u.name ORDER BY id DESC) AS temp GROUP BY name ORDER BY name";
             $result = mysqli_query($conn, $sql);
 
