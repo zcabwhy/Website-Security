@@ -186,6 +186,8 @@
       mysqli_close($conn);
     ?>
   </div>
+  <br>
+  <br>
   <div class="footer">
     <a href="https://github.com/zcabwhy/Website-Security">
       <img style='display: block; margin-left: auto; margin-right: auto;height:30px; width:30px; margin-bottom: 10px;' src="images/github.png"/>
