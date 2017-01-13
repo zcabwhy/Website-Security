@@ -45,13 +45,10 @@
     <div class="container-fluid text-center">
       <h2>Welcome <?php echo $name?> to Snippets!</h2>
       <?php
-
       $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
-
       $sql = "SELECT name , password FROM users WHERE name = '$name'";
       $result = mysqli_query($conn, $sql);
 
@@ -61,7 +58,6 @@
           echo "<h3>User Link</h3><h4>http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "?uid=" . $row['name'] . "&pw=" . $row['password'] . "</h4>";
         }
       }
-
       mysqli_close($conn);
       ?>
       <h3>Current Members</h3>

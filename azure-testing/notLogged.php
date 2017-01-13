@@ -34,14 +34,6 @@
     <div class="container-fluid text-center">
       <h1>Current Members</h1>
       <div class="col-md-10 col-md-offset-1">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="text-align: center;">Names</th>
-              <th style="text-align: left;">Snippet (Most Recent)</th>
-            </tr>
-          </thead>
-          <tbody>
             <?php
               include 'dbconnection.php';
 
@@ -54,6 +46,14 @@
               $result = mysqli_query($conn, $sql);
 
               if (mysqli_num_rows($result) > 0) {
+                echo "<table class='table'>
+                  <thead>
+                    <tr>
+                      <th style='text-align: center;'>Names</th>
+                      <th style='text-align: left;'>Snippet (Most Recent)</th>
+                    </tr>
+                  </thead>
+                  <tbody>";
                 while($row = mysqli_fetch_assoc($result)) {
                   $linkname = $row['name'];
                   $message = $row['message'];
@@ -65,7 +65,6 @@
               } else {
                 echo "There are no member! Be the first!";
               }
-
               mysqli_close($conn);
             ?>
           </tbody>
