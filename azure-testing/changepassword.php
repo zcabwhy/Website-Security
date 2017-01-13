@@ -1,9 +1,9 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["uid"];
-  $currentPassword = $_POST["currentPassword"];
-  $newPassword = $_POST["newPassword"];
+  $name = htmlspecialchars($_SESSION["uid"]);
+  $currentPassword = htmlspecialchars($_POST["currentPassword"]);
+  $newPassword = htmlspecialchars($_POST["newPassword"]);
   if(!empty($_POST["currentPassword"]) || !empty($_POST["newPassword"])) {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);

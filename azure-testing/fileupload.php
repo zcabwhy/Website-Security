@@ -1,7 +1,7 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["name"];
+  $name = htmlspecialchars($_SESSION["name"]);
 
   if (!file_exists("uploads")){
     mkdir("uploads");

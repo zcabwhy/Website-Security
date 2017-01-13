@@ -1,7 +1,8 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["name"];
+  // $name = $_SESSION["name"];
+  $name = htmlspecialchars($_SESSION["name"]); 
 
   $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
   if (!$conn) {

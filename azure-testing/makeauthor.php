@@ -2,7 +2,7 @@
   include 'dbconnection.php';
   session_start();
 
-  $name = $_SESSION["uid"];
+  $name = htmlspecialchars($_SESSION["uid"]);
 
   if(isset($_GET['optradio']))
   {

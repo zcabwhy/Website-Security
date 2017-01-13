@@ -3,7 +3,8 @@
   session_start();
   $name = $_SESSION["uid"];
   // $currentPassword = $_GET["currentURL"];
-  $newSnippet = $_GET["newSnippet"];
+  // $newSnippet = $_GET["newSnippet"]; //insecure
+  $newSnippet = htmlspecialchars($newSnippet = $_GET["newSnippet"]);
   if(!empty($_GET["newSnippet"])) {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);

@@ -1,8 +1,8 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_POST["name"];
-  $password = $_POST["password"];
+  $name = htmlspecialchars($_POST["name"]);
+  $password = htmlspecialchars($_POST["password"]);
   $countResult = "";
 
   try{

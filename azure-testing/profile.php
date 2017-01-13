@@ -1,7 +1,7 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["name"];
+  $name = htmlspecialchars($_SESSION["name"]);
   $profileid = $_GET['uid'];
   if ($profileid == ''){
     $profileid = $name;

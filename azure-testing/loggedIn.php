@@ -50,6 +50,8 @@
         die("Connection failed: " . mysqli_connect_error());
       }
       $sql = "SELECT name , password FROM users WHERE name = '$name'";
+      // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = :name");
+      // // 
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {

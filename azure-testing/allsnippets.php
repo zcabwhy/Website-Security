@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $name = $_SESSION["name"];
+  $name = htmlspecialchars($_SESSION["name"]);
 ?>
 <!DOCTYPE html>
 <html>

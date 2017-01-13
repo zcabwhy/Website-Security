@@ -4,12 +4,12 @@
   $uid = $_GET['uid'];
   $pw = $_GET['pw'];
   if ($uid==''){
-    $name = $_POST["name"];
+    $name = htmlspecialchars($_POST["name"]);
   } else {
     $name = $uid;
   }
   if ($pw==''){
-    $password = $_POST["password"];
+    $password = htmlspecialchars($_POST["password"]);
   } else {
     $password = $pw;
   }

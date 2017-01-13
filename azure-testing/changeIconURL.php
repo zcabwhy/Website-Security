@@ -1,7 +1,7 @@
 <?php
   include 'dbconnection.php';
   session_start();
-  $name = $_SESSION["uid"];
+  $name = htmlspecialchars($_SESSION["uid"]);
   // $currentPassword = $_POST["currentURL"];
   $newURL = $_POST["newURL"];
   if(!empty($_POST["newURL"])) {
