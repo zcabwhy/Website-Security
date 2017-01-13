@@ -13,6 +13,12 @@
 <body>
   <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
     <div class="container">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <div class="navbar-header">
         <a class="navbar-brand" href="index.php">Snippets</a>
       </div>
@@ -39,14 +45,6 @@
       <h2>All Snippets</h2>
       <h4><a href='newsnippet.php'>Add Snippet</a> | <a href='snippets.php'>Your Snippets</a></h4>
       <div class="col-md-10 col-md-offset-1">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="text-align: center;">Names</th>
-              <th style="text-align: left;">Snippets</th>
-            </tr>
-          </thead>
-          <tbody>
             <?php
               include 'dbconnection.php';
               session_start();
@@ -58,6 +56,14 @@
               $sql = "SELECT * FROM messages";
               $result = mysqli_query($conn, $sql);
               if (mysqli_num_rows($result) > 0) {
+                echo '<table class="table">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;">Names</th>
+                      <th style="text-align: left;">Snippets</th>
+                    </tr>
+                  </thead>
+                  <tbody>';
                 while($row = mysqli_fetch_assoc($result)) {
                   $linkname = $row['name'];
                   $message = $row['message'];
@@ -66,14 +72,18 @@
                   }
                   echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
                 }
+                echo "</tbody>
+                  </table>";
+              } else {
+                  echo "<i>No one has posted a snippet yet!</i>";
               }
-
               mysqli_close($conn);
             ?>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>')</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

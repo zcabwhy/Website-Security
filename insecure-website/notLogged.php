@@ -10,6 +10,12 @@
   <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="index.php">Snippets</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
@@ -28,14 +34,6 @@
     <div class="container-fluid text-center">
       <h1>Current Members</h1>
       <div class="col-md-10 col-md-offset-1">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="text-align: center;">Names</th>
-              <th style="text-align: left;">Snippet (Most Recent)</th>
-            </tr>
-          </thead>
-          <tbody>
             <?php
               include 'dbconnection.php';
 
@@ -48,6 +46,14 @@
               $result = mysqli_query($conn, $sql);
 
               if (mysqli_num_rows($result) > 0) {
+                echo "<table class='table'>
+                  <thead>
+                    <tr>
+                      <th style='text-align: center;'>Names</th>
+                      <th style='text-align: left;'>Snippet (Most Recent)</th>
+                    </tr>
+                  </thead>
+                  <tbody>";
                 while($row = mysqli_fetch_assoc($result)) {
                   $linkname = $row['name'];
                   $message = $row['message'];
@@ -59,7 +65,6 @@
               } else {
                 echo "There are no member! Be the first!";
               }
-
               mysqli_close($conn);
             ?>
           </tbody>
@@ -67,5 +72,8 @@
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>')</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

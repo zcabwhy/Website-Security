@@ -103,13 +103,30 @@
           mkdir($dir);
         } else {
         $files = scandir($dir);
-        echo '<ul>';
+      }
+      if (!is_dir_empty($dir)) {
+        echo '<table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Snippet</th>
+              <th style="text-align: center;">Delete</th>
+            </tr>
+          </thead>
+          <tbody>';
         foreach( $files as $file ){
           if(($file != ".")&&($file != "..")){
-           echo '<li><a href="http://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $name . '/' . $file . '">' . $file . '</a></br>';
-         }
+            echo '<tr><td style="text-align:left;"><a href="http://' . $_SERVER['HTTP_HOST'] . '/uploads/' . $name . '/' . $file . '">' . $file . '</a>' . '</td><td style="width: 175px;text-align:center;"><a href="deletefile.php?filename=' . $file . '">[X]</a></td></tr>';
+          }
         }
-        echo '</ul>';
+        echo "</tbody>
+          </table>";
+      } else {
+        echo "You haven't uploaded any files yet!";
+      }
+
+      function is_dir_empty($dir) {
+        if (!is_readable($dir)) return NULL;
+        return (count(scandir($dir)) == 2);
       }
       ?>
   </div>
