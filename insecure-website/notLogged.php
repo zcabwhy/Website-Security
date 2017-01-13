@@ -44,9 +44,7 @@
               if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
               }
-              $sql = "SET sql_mode = ''";
-              mysqli_query($conn, $sql);
-              $sql = "SELECT * FROM ( SELECT u.name , m.message , id FROM users as u Left JOIN messages as m ON m.name = u.name ORDER BY id DESC) AS temp GROUP BY name ORDER BY name";
+              $sql = "SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name";
               $result = mysqli_query($conn, $sql);
 
               if (mysqli_num_rows($result) > 0) {
