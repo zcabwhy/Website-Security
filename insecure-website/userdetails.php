@@ -55,7 +55,6 @@
           if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
           }
-
           $sql = "SELECT message FROM messages WHERE name = '" . $linkname . "' ORDER BY id DESC";
           $result = mysqli_query($conn, $sql);
 

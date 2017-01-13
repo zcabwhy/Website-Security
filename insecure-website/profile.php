@@ -55,30 +55,23 @@
     }
     ?>
 
-    <p><?php
-    // $currentname = "Will";
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
-    $sql = "SELECT iconURL FROM users WHERE name='$profileid'";
-    foreach ($conn->query($sql) as $row) {
-          // print '<label>';
-          // echo "<div style='text-align:center; height:500px; width:500px;'>";
-          // echo $row['iconURL'];
-          if ($row['iconURL'] != ''){
-            echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
-          }
-          // echo "</div>";
-          // print '</label>';
-      }
-    $conn = null;
-    // $name = "Icon URL";
-    // echo $name; ?></p>
-
-
+    <p>
+      <?php
+      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // echo "Connected successfully";
+      $sql = "SELECT iconURL FROM users WHERE name='$profileid'";
+      foreach ($conn->query($sql) as $row) {
+            if ($row['iconURL'] != ''){
+              echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
+            }
+        }
+      $conn = null;
+      // $name = "Icon URL";
+      // echo $name; ?>
+    </p>
     <h2 style="text-align:center;"><?php echo "$profileid"; ?></h2>
-
     <h2>Change Username</h1>
     <form action="changename.php" method="post">
       <p><label> Current Username:</label><?php echo " $profileid"; ?></p>
@@ -126,7 +119,7 @@
     </p>
 
 
-    <form action="changeSnippet.php" method="post">
+    <form action="changeSnippet.php" method="get">
       <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
       <!-- <input type="text" class="form-control" name="newName"><br> -->
       <input type="submit" class="btn btn-primary">
