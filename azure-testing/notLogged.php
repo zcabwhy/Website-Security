@@ -18,8 +18,8 @@
         </button>
         <a class="navbar-brand" href="index.php">Snippets</a>
       </div>
-      <div  id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav pull-right">
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="signin.php">Sign in</a>
           </li>
