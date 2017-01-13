@@ -27,8 +27,11 @@
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       // set the PDO error mode to exception
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql = "SELECT password FROM users WHERE name = '$username'";
-      $rows = $conn->query($sql);
+      // $sql = "SELECT password FROM users WHERE name = '$username'";
+      // $rows = $conn->query($sql);
+      $sql = $conn->prepare("SELECT password FROM users WHERE name = ?");
+      $sql->execute(array($username));
+      $rows = $sql->fetchAll(PDO::FETCH_ASSOC); 
       foreach($rows as $row){
         $cpass = $row["password"];
         if($pw == $cpass){
