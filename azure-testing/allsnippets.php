@@ -2,44 +2,7 @@
   session_start();
   $name = htmlspecialchars($_SESSION["name"]);
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"/>
-  <title>Snippets</title>
-  <link href="style.css" rel="stylesheet">
-</head>
-<body>
-  <nav class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.php">Snippets</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="profile.php">Logged in as <?php echo $name; ?></a>
-          </li>
-          <li>
-            <a href="snippets.php">Snippets</a>
-          </li>
-          <li>
-            <a href="fileupload.php">Storage</a>
-          </li>
-          <li>
-            <a href="logOut.php">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<?php include_once('header.php');?>
   <div class="container">
     <div class="container-fluid text-center">
       <h2>All Snippets</h2>
@@ -82,16 +45,4 @@
       </div>
     </div>
   </div>
-  <br>
-  <br>
-  <div class="footer">
-    <a href="https://github.com/zcabwhy/Website-Security">
-      <img style='display: block; margin-left: auto; margin-right: auto;height:30px; width:30px; margin-bottom: 10px;' src="images/github.png"/>
-    </a>
-    Copyright © 2017 Kazuma Hochin, Sam Pham, William Lam, Zi Sim - Team K SW3
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>')</script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-</html>
+  <?php include_once('footer.php');?>
