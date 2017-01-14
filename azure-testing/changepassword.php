@@ -30,7 +30,7 @@
       // $stmt->execute();
       $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
       $sql = $conn->prepare("UPDATE users SET password = :newPassword WHERE name = :name");
-      $sql->bindParam(':newPassword', $newPassword);
+      $sql->bindParam(':newPassword', $hashedNewPassword);
       $sql->bindParam(':name', $name);
       $sql->execute();
       header("Location: /?action=profile&status=success");
