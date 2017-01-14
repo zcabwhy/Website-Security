@@ -76,6 +76,7 @@ switch ($action) {
     }
     break;
   case 'allsnippets':
+    $result_allsnippets = get_allsnippets();
     include "view/allsnippets.php";
     break;
   case 'snippets':

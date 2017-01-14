@@ -12,7 +12,7 @@
       <h4><a href='/?action=newsnippet'>Add Snippet</a> | <a href='/?action=snippets'>Your Snippets</a></h4>
       <div class="col-md-10 col-md-offset-1">
             <?php
-              if (mysqli_num_rows($result) > 0) {
+              if (mysqli_num_rows($result_allsnippets) > 0) {
                 echo '<table class="table">
                   <thead>
                     <tr>
@@ -21,11 +21,11 @@
                     </tr>
                   </thead>
                   <tbody>';
-                while($row = mysqli_fetch_assoc($result)) {
+                while($row = mysqli_fetch_assoc($result_allsnippets)) {
                   $linkname = $row['name'];
                   $message = $row['message'];
                   if ($message == NULL){
-                    $message = "<i>The user hasn't posted a snippet yet!</i>";
+                    $message = "<i>No one has posted a snippet yet!</i>";
                   }
                   echo "<tr><th style='width: 175px;text-align:center;'><a href='userdetails.php?linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
                 }

@@ -56,8 +56,8 @@ require_once('database.php');
     }
     $sql = "SELECT * FROM messages";
     $result = mysqli_query($conn, $sql);
-
-
+    mysqli_close($conn);
+    return $result;
   }
 
 
