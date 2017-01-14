@@ -10,6 +10,13 @@
     }
   }
 
+  $csrf_token = md5(uniqid(rand(), TRUE));
+  $_SESSION['csrf_token'] = $csrf_token;
+  $_SESSION['csrf_token_time'] = time();
+
+  // echo "csrf token = " .$csrf_token;
+  // echo "session token = ". $_SESSION['csrf_token'];
+  // echo "session token time = ". $_SESSION['csrf_token_time'];
 ?>
 <?php
   include_once('header.php');
@@ -22,6 +29,7 @@
       <div class="col-md-12">
         <form method="post" action="addsnippettodb.php">
           <div class="form-group">
+            <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
             <textarea name='snippet' class="form-control" id="exampleTextarea" rows="3" placeholder=<?php echo (($author==0)?'"You are do not have permission to make a snippet!" disabled':'"Add a new snippet"');?>></textarea>
           </div>
           <?php echo (($author==1)?'<input type="submit" class="btn btn-block btn-primary">':'');?>
