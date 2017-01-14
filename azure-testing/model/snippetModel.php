@@ -11,9 +11,6 @@ require_once('database.php');
     }
     $sql = "SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name";
     $result = mysqli_query($conn, $sql);
-    // $sql = $conn->prepare("SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name");
-    // $sql->execute();
-    // $result = $sql->fetch();
     mysqli_close($conn);
     return $result;
   }
@@ -26,19 +23,18 @@ require_once('database.php');
     if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT name , password FROM users WHERE name = '$name'";
-    // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = :name");
-    // //
-    // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = ?");
-    // $sql->bind_param("s",$name);
-    // $sql->execute();
-    $result = mysqli_query($conn, $sql);
-    // $result = $sql->fetch();
+    // $sql = "SELECT name , password FROM users WHERE name = '$name'";
+    // $result = mysqli_query($conn, $sql);
+
+    $sql = $conn->prepare("SELECT name, password FROM users WHERE name = ?");
+    $sql->bind_param('s',$name);
+    $sql->execute();
+    $result = $sql->get_result();
     mysqli_close($conn);
     return $result;
   }
 
-  function get_authorstatus(){
+  function get_authorstatus(){ //not fixed yet
     include 'dbconnection.php';
     session_start();
     $name = htmlspecialchars($_SESSION["name"]);
@@ -46,8 +42,13 @@ require_once('database.php');
     if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT author FROM users WHERE name = '" . $name . "'";
-    $result = mysqli_query($conn, $sql);
+    // $sql = "SELECT author FROM users WHERE name = '" . $name . "'";
+    // $result = mysqli_query($conn, $sql);
+
+    $sql = $conn->prepare("SELECT author FROM users WHERE name = ?");
+    $sql->bind_param('s',$name);
+    $sql->execute();
+    $result = $sql->get_result();
     mysqli_close($conn);
     return $result;
   }

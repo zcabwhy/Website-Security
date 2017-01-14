@@ -22,8 +22,12 @@
             if(!$conn){
                 die("Connection failed: ".mysqli_connect_error());
             }
-            $sql = "SELECT * FROM messages WHERE name = '$name'";
-            $result = mysqli_query($conn, $sql);
+            // $sql = "SELECT * FROM messages WHERE name = '$name'";
+            // $result = mysqli_query($conn, $sql);
+            $sql = $conn->prepare("SELECT * FROM messages WHERE name = ?");
+            $sql->bind_param('s', $name);
+            $sql->execute();
+            $result = $sql->get_result();
 
             if (mysqli_num_rows($result) > 0) {
               echo '<table class="table">
