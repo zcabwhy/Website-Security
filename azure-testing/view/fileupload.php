@@ -17,6 +17,18 @@
     $file_tmp =$_FILES['file']['tmp_name'];
     $file_type=$_FILES['file']['type'];
     $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
+
+    $expensions= array("jpeg","jpg","png","gif","pdf","txt");
+
+      if(in_array($file_ext,$expensions)=== false){
+         $errors[]="Extension not allowed, please choose a JPEG, JPG, PNG, GIF, PDF or TXT file.";
+      }
+
+      if($file_size > 2097152){
+         $errors[]='File size must be less than or equal to 2 MB';
+      }
+
+
     if(empty($errors)==true){
        move_uploaded_file($file_tmp,"uploads/" . $name . "/" .$file_name);
        $fileMoveStatus = true;
@@ -24,7 +36,7 @@
     }
     else{
       $fileMoveStatus = false;
-      print_r($errors);
+      print($errors[0]);
     }
   }
 ?>
