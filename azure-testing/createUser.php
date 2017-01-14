@@ -3,6 +3,7 @@
   session_start();
   $name = htmlspecialchars($_POST["name"]);
   $password = htmlspecialchars($_POST["password"]);
+  $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
   $countResult = "";
   if (strlen($password) < 8) {
        header("Location: /?action=register&status=password");
@@ -25,7 +26,7 @@
       // $conn->exec($sql);
       $sql = $conn->prepare("INSERT INTO users (name, password) VALUES (:name, :password)");
       $sql->bindParam(':name',$name);
-      $sql->bindParam(':password',$password);
+      $sql->bindParam(':password',$hashedpassword);
       $sql->execute();
     }
     $conn = null;

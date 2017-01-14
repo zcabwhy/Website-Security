@@ -33,7 +33,7 @@
       $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
       foreach($rows as $row){
         $cpass = $row["password"];
-        if($pw == $cpass){
+        if(password_verify($pw, $cpass)){
           $conn = null;
           return TRUE;
         }

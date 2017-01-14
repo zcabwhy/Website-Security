@@ -17,7 +17,7 @@
       $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
       $found = FALSE;
       foreach($rows as $row){
-        if($row["password"] == $currentPassword){
+        if(password_verify($currentPassword, $row["password"])){
           $found = TRUE;
         }
       }
@@ -28,6 +28,7 @@
       // $sql = "UPDATE users SET password='$newPassword' WHERE name='$name'";
       // $stmt = $conn->prepare($sql);
       // $stmt->execute();
+      $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
       $sql = $conn->prepare("UPDATE users SET password = :newPassword WHERE name = :name");
       $sql->bindParam(':newPassword', $newPassword);
       $sql->bindParam(':name', $name);
