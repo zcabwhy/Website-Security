@@ -32,7 +32,7 @@ if ($conn->connect_error) {
 }
 $sql = "CREATE TABLE users(
   name varchar(32) PRIMARY KEY,
-  password varchar(16) default null,
+  password varchar(255) default null,
   iconURL varchar(500) default null,
   snippet varchar(250) default null,
   admin boolean not null default 0,
