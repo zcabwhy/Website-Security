@@ -12,15 +12,6 @@
       <h4><a href='/?action=newsnippet'>Add Snippet</a> | <a href='/?action=snippets'>Your Snippets</a></h4>
       <div class="col-md-10 col-md-offset-1">
             <?php
-              include 'dbconnection.php';
-              session_start();
-              $name = $_SESSION["name"];
-              $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-              if(!$conn){
-                  die("Connection failed: ".mysqli_connect_error());
-              }
-              $sql = "SELECT * FROM messages";
-              $result = mysqli_query($conn, $sql);
               if (mysqli_num_rows($result) > 0) {
                 echo '<table class="table">
                   <thead>
@@ -43,7 +34,6 @@
               } else {
                   echo "<i>No one has posted a snippet yet!</i>";
               }
-              mysqli_close($conn);
             ?>
       </div>
     </div>

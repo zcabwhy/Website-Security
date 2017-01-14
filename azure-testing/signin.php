@@ -13,7 +13,6 @@
           echo "<div class = 'alert alert-success'>Successfully logged out!</div>";
         } else if ($_GET['status'] == "badlogin"){
           echo "<div class = 'alert alert-danger'>Incorrect username or password!</div>";
-
         }
         ?>
         <form action="login.php" method="post" autocomplete="off">

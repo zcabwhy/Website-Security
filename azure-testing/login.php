@@ -29,7 +29,7 @@
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       // $sql = "SELECT password FROM users WHERE name = '$username'";
       // $rows = $conn->query($sql);
-      $sql = $conn->prepare("SELECT password FROM users WHERE name = ?");
+      $sql = $conn->prepare("SELECT password FROM users");
       $sql->execute(array($username));
       $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
       foreach($rows as $row){

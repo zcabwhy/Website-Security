@@ -17,17 +17,8 @@
     <div class="container-fluid text-center">
       <h2>Welcome <?php echo $name?> to Snippets!</h2>
       <?php
-      $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-      if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-      }
-      $sql = "SELECT name , password FROM users WHERE name = '$name'";
-      // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = :name");
-      // //
-      $result = mysqli_query($conn, $sql);
-
-      if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
+      if (mysqli_num_rows($result_namepassword) > 0) {
+        while($row = mysqli_fetch_assoc($result_namepassword)) {
 
           echo "<h3>User Link</h3><h4>http://" . $_SERVER['HTTP_HOST'] . "/login.php" . "?uid=" . $row['name'] . "&pw=" . $row['password'] . "</h4>";
         }
@@ -45,14 +36,8 @@
           </thead>
           <tbody>
             <?php
-            $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-            if (!$conn) {
-              die("Connection failed: " . mysqli_connect_error());
-            }
-            $sql = "SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name";
-            $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) > 0) {
-              while($row = mysqli_fetch_assoc($result)) {
+            if (mysqli_num_rows($result_recentsnippets) > 0) {
+              while($row = mysqli_fetch_assoc($result_recentsnippets)) {
                 $linkname = $row['name'];
                 $message = $row['message'];
                 if ($message == NULL){
@@ -61,7 +46,6 @@
                 echo "<tr><th style='width: 175px;text-align:center;'><a href='/?action=userdetails&linkname=" . $linkname . "'>" . $row["name"]. "</a></th><td style='text-align:left;'>" . $message . "</td></tr>";
               }
             }
-            mysqli_close($conn);
             ?>
           </tbody>
         </table>

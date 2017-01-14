@@ -1,6 +1,8 @@
 <?php
 
 include 'dbconnection.php';
+include 'model/snippetModel.php';
+require_once('database.php');
 
 // Create database
 $conn = new mysqli($servername, $dbusername, $dbpassword);
@@ -65,7 +67,9 @@ if (isset($_POST['action'])) {
 
 switch ($action) {
   case 'index':
+    $result_recentsnippets = get_recentsnippets();
     if(!empty($_SESSION["name"])){
+      $result_namepassword = get_namepassword();
       include "loggedIn.php";
     } else {
       include "notLogged.php";

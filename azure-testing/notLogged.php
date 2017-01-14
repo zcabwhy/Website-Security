@@ -1,4 +1,4 @@
-<?php 
+<?php
   include_once('header.php');
   include_once('navbar.php');
 ?>
@@ -7,17 +7,7 @@
       <h1>Current Members</h1>
       <div class="col-md-10 col-md-offset-1">
             <?php
-              include 'dbconnection.php';
-
-              $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-
-              if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-              }
-              $sql = "SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name";
-              $result = mysqli_query($conn, $sql);
-
-              if (mysqli_num_rows($result) > 0) {
+              if (mysqli_num_rows($result_recentsnippets) > 0) {
                 echo "<table class='table'>
                   <thead>
                     <tr>
@@ -26,7 +16,7 @@
                     </tr>
                   </thead>
                   <tbody>";
-                while($row = mysqli_fetch_assoc($result)) {
+                while($row = mysqli_fetch_assoc($result_recentsnippets)) {
                   $linkname = $row['name'];
                   $message = $row['message'];
                   if ($message == NULL){
@@ -37,7 +27,6 @@
               } else {
                 echo "There are no member! Be the first!";
               }
-              mysqli_close($conn);
             ?>
           </tbody>
         </table>
