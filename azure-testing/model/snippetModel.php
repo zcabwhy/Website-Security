@@ -11,6 +11,9 @@ require_once('database.php');
     }
     $sql = "SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name";
     $result = mysqli_query($conn, $sql);
+    // $sql = $conn->prepare("SELECT u.name , n.message FROM users as u LEFT JOIN (SELECT * FROM messages WHERE (name , id) IN (SELECT name , MAX(id) FROM messages GROUP BY name)) AS n ON u.name = n.name ORDER BY u.name");
+    // $sql->execute();
+    // $result = $sql->fetch();
     mysqli_close($conn);
     return $result;
   }
@@ -26,8 +29,11 @@ require_once('database.php');
     $sql = "SELECT name , password FROM users WHERE name = '$name'";
     // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = :name");
     // //
+    // $sql = $conn->prepare("SELECT name , password FROM users WHERE name = ?");
+    // $sql->bind_param("s",$name);
+    // $sql->execute();
     $result = mysqli_query($conn, $sql);
-
+    // $result = $sql->fetch();
     mysqli_close($conn);
     return $result;
   }

@@ -9,8 +9,12 @@
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = "SELECT password FROM users WHERE name = '$name'";
-      $rows = $conn->query($sql);
+      // $sql = "SELECT password FROM users WHERE name = '$name'";
+      // $rows = $conn->query($sql);
+      $sql = $conn->prepare("SELECT password FROM users WHERE name = :name");
+      $sql->bindParam(':name', $name);
+      $sql->execute();
+      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
       $found = FALSE;
       foreach($rows as $row){
         if($row["password"] == $currentPassword){
@@ -21,9 +25,13 @@
         header("Location: /?action=profile&status=failure&error=incorrectpassword");
         return;
       }
-      $sql = "UPDATE users SET password='$newPassword' WHERE name='$name'";
-      $stmt = $conn->prepare($sql);
-      $stmt->execute();
+      // $sql = "UPDATE users SET password='$newPassword' WHERE name='$name'";
+      // $stmt = $conn->prepare($sql);
+      // $stmt->execute();
+      $sql = $conn->prepare("UPDATE users SET password = :newPassword WHERE name = :name");
+      $sql->bindParam(':newPassword', $newPassword);
+      $sql->bindParam(':name', $name);
+      $sql->execute();
       header("Location: /?action=profile&status=success");
     }
     catch(PDOException $e) {

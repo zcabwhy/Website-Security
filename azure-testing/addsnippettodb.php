@@ -8,8 +8,12 @@
   if(!$conn){
       die("Connection failed: ".mysqli_connect_error());
   }
-  $sql = "INSERT INTO messages VALUES(null,'$name','$message');";
-  $result = mysqli_query($conn, $sql);
+  $temp = null;
+  // $sql = "INSERT INTO messages VALUES(null,'$name','$message');";
+  // $result = mysqli_query($conn, $sql)
+  $sql = $conn->prepare("INSERT INTO messages VALUES (?,?,?)");
+  $sql->bind_param("iss", $temp, $name, $message);
+  $sql->execute(); 
   mysqli_close($conn);
   header("Location:/?action=snippets");
 ?>
