@@ -19,7 +19,7 @@
     $_SESSION["name"] = $name;
     header("Location: /");
   }else{
-    header("Location: /?action=signin&status=badlogin");
+    header("Location: /?action=login&status=badlogin");
   }
 
   function checkPass($servername, $dbusername, $dbpassword, $dbname, $username, $pw){
