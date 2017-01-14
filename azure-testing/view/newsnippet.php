@@ -20,7 +20,7 @@
       <h2>New Snippet</h2>
       <h4><a href='/?action=snippets'>Your Snippets</a> | <a href='/?action=allsnippets'>View All Snippets </a></h4>
       <div class="col-md-12">
-        <form method="get" action="addsnippettodb.php">
+        <form method="post" action="addsnippettodb.php">
           <div class="form-group">
             <textarea name='snippet' class="form-control" id="exampleTextarea" rows="3" placeholder=<?php echo (($author==0)?'"You are do not have permission to make a snippet!" disabled':'"Add a new snippet"');?>></textarea>
           </div>
