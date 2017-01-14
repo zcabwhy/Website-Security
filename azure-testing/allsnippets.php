@@ -9,7 +9,7 @@
   <div class="container">
     <div class="container-fluid text-center">
       <h2>All Snippets</h2>
-      <h4><a href='newsnippet.php'>Add Snippet</a> | <a href='snippets.php'>Your Snippets</a></h4>
+      <h4><a href='/?action=newsnippet'>Add Snippet</a> | <a href='/?action=snippets'>Your Snippets</a></h4>
       <div class="col-md-10 col-md-offset-1">
             <?php
               include 'dbconnection.php';

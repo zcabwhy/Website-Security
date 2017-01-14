@@ -25,7 +25,7 @@
   <div class="container">
     <div class="container-fluid text-center">
       <h2>New Snippet</h2>
-      <h4><a href='snippets.php'>Your Snippets</a> | <a href='allsnippets.php'>View All Snippets </a></h4>
+      <h4><a href='/?action=snippets'>Your Snippets</a> | <a href='/?action=allsnippets'>View All Snippets </a></h4>
       <div class="col-md-12">
         <form method="get" action="addsnippettodb.php">
           <div class="form-group">

@@ -11,5 +11,5 @@
   $sql = "INSERT INTO messages VALUES(null,'$name','$message');";
   $result = mysqli_query($conn, $sql);
   mysqli_close($conn);
-  header("Location:snippets.php");
+  header("Location:/?action=snippets");
 ?>

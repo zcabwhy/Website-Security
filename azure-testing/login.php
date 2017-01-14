@@ -17,9 +17,9 @@
   if(checkPass($servername, $dbusername, $dbpassword, $dbname, $name, $password)){
     session_start();
     $_SESSION["name"] = $name;
-    header("Location: index.php");
+    header("Location: /");
   }else{
-    header("Location: signin.php?status=badlogin");
+    header("Location: /?action=signin&status=badlogin");
   }
 
   function checkPass($servername, $dbusername, $dbpassword, $dbname, $username, $pw){
@@ -31,7 +31,7 @@
       // $rows = $conn->query($sql);
       $sql = $conn->prepare("SELECT password FROM users WHERE name = ?");
       $sql->execute(array($username));
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC); 
+      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
       foreach($rows as $row){
         $cpass = $row["password"];
         if($pw == $cpass){

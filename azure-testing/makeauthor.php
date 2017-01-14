@@ -13,13 +13,13 @@
       $sql = "UPDATE users SET author='$selected_radio' WHERE name='$name'";
       $stmt = $conn->prepare($sql);
       $stmt->execute();
-      header("Location: profile.php?uid=$name&status=success");
+      header("Location: /?action=profile&uid=$name&status=success");
     }
     catch(PDOException $e) {
-      header("Location: profile.php?uid=$name&status=failure&error=" . $e->getMessage());
+      header("Location: /?action=profile&uid=$name&status=failure&error=" . $e->getMessage());
     }
     $conn = null;
   } else {
-    header("Location: profile.php?uid=$name&status=failure");
+    header("Location: /?action=profile&uid=$name&status=failure");
   }
 ?>

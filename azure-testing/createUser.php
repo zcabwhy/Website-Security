@@ -18,12 +18,12 @@
     }
     $conn = null;
   }catch(PDOException $e) {
-    header("Location: register.php?status=alreadyexists");//should be status failure;
+    header("Location: /?action=register&status=alreadyexists");//should be status failure;
   }
 
   if($countResult == 0){
-    header("Location: register.php?status=success");
+    header("Location: /?action=register&status=success");
   }else{
-    header("Location: register.php?status=alreadyexists");
+    header("Location: /?action=register&status=alreadyexists");
   }
 ?>

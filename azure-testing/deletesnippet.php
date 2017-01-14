@@ -8,5 +8,5 @@
   $sql = "DELETE FROM messages WHERE ID = '$number'";
   $result = mysqli_query($conn, $sql);
   mysqli_close($conn);
-  header("Location:snippets.php");
+  header("Location:/?action=snippets");
 ?>

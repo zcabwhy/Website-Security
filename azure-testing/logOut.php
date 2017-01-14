@@ -8,5 +8,5 @@
   }else{
     $errorMessage = "error";
   }
-  header("Location:signin.php?status=" . $errorMessage);
+  header("Location:/?action=login&status=" . $errorMessage);
 ?>

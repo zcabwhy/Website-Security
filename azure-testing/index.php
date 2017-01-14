@@ -70,14 +70,32 @@
         include "notLogged.php";
       }
       break;
-    case 'allsnipets':
-      include "allsnipets.php";
+    case 'allsnippets':
+      include "allsnippets.php";
       break;
     case 'snippets':
       include "snippets.php";
       break;
     case 'fileupload':
       include "fileupload.php";
+      break;
+    case 'profile':
+      include "profile.php";
+      break;
+    case 'newsnippet':
+      include "newsnippet.php";
+      break;
+    case 'userdetails':
+      include "userdetails.php";
+      break;
+    case 'logout':
+      include "logOut.php";
+      break;
+    case 'login':
+      include "signin.php";
+      break;
+    case 'register':
+      include "register.php";
       break;
   }
 

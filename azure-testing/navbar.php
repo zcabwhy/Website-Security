@@ -14,12 +14,12 @@
         <li>
         <?php
           if(!(isset($_SESSION["name"]) && $_SESSION["name"] != '')){
-            echo "  <a href='signin.php'>Sign in</a>
+            echo "  <a href='/?action=login'>Sign in</a>
             </li>
             <li>
-              <a href='register.php'>Register</a>";
+              <a href='/?action=register'>Register</a>";
           } else {
-            echo "<a href='profile.php'>Logged in as " .$_SESSION['name'] . "</a>
+            echo "<a href='/?action=profile'>Logged in as " .$_SESSION['name'] . "</a>
           </li>
           <li>
             <a href='/?action=snippets'>Snippets</a>

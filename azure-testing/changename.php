@@ -19,13 +19,13 @@
       if (file_exists($dir)){
         rename("uploads/" . $name . "/" , "uploads/" . $newName . "/");
       }
-      header("Location: profile.php?status=success");
+      header("Location: /?action=profile&status=success");
     }
     catch(PDOException $e) {
-      header("Location: profile.php?status=failure&error=" . $e->getMessage());
+      header("Location: /?action=profile&status=failure&error=" . $e->getMessage());
     }
     $conn = null;
   } else {
-    header("Location: profile.php?status=failure");
+    header("Location: /?action=profile&status=failure");
   }
 ?>

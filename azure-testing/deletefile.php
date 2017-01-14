@@ -5,5 +5,5 @@
   $filename = $_GET['filename'];
 
   unlink("uploads/" . $name . "/" .$filename);
-  header("Location: fileupload.php");
+  header("Location: /?action=fileupload");
 ?>

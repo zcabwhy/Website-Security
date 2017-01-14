@@ -18,19 +18,19 @@
         }
       }
       if ($found == FALSE){
-        header("Location: profile.php?status=failure&error=incorrectpassword");
+        header("Location: /?action=profile&status=failure&error=incorrectpassword");
         return;
       }
       $sql = "UPDATE users SET password='$newPassword' WHERE name='$name'";
       $stmt = $conn->prepare($sql);
       $stmt->execute();
-      header("Location: profile.php?status=success");
+      header("Location: /?action=profile&status=success");
     }
     catch(PDOException $e) {
-      header("Location: profile.php?status=failure&error=" . $e->getMessage());
+      header("Location: /?action=profile&status=failure&error=" . $e->getMessage());
     }
     $conn = null;
   } else {
-    header("Location: profile.php?status=failure");
+    header("Location: /?action=profile&status=failure");
   }
 ?>
