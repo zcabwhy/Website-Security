@@ -70,37 +70,38 @@ switch ($action) {
     $result_recentsnippets = get_recentsnippets();
     if(!empty($_SESSION["name"])){
       $result_namepassword = get_namepassword();
-      include "loggedIn.php";
+      include "view/loggedIn.php";
     } else {
-      include "notLogged.php";
+      include "view/notLogged.php";
     }
     break;
   case 'allsnippets':
-    include "allsnippets.php";
+    include "view/allsnippets.php";
     break;
   case 'snippets':
-    include "snippets.php";
+    include "view/snippets.php";
     break;
   case 'fileupload':
-    include "fileupload.php";
+    include "view/fileupload.php";
     break;
   case 'profile':
-    include "profile.php";
+    include "view/profile.php";
     break;
   case 'newsnippet':
-    include "newsnippet.php";
+    $result_authorstatus = get_authorstatus();
+    include "view/newsnippet.php";
     break;
   case 'userdetails':
-    include "userdetails.php";
+    include "view/userdetails.php";
     break;
   case 'logout':
-    include "logOut.php";
+    include "view/logOut.php";
     break;
   case 'login':
-    include "signin.php";
+    include "view/signin.php";
     break;
   case 'register':
-    include "register.php";
+    include "view/register.php";
     break;
 }
 ?>

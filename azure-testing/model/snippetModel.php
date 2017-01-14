@@ -32,6 +32,20 @@ require_once('database.php');
     return $result;
   }
 
+  function get_authorstatus(){
+    include 'dbconnection.php';
+    session_start();
+    $name = htmlspecialchars($_SESSION["name"]);
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql = "SELECT author FROM users WHERE name = '" . $name . "'";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    return $result;
+  }
+
   function get_allsnippets(){
     include 'dbconnection.php';
 

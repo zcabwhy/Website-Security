@@ -25,10 +25,7 @@
   function checkPass($servername, $dbusername, $dbpassword, $dbname, $username, $pw){
     try{
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      // set the PDO error mode to exception
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      // $sql = "SELECT password FROM users WHERE name = '$username'";
-      // $rows = $conn->query($sql);
       $sql = $conn->prepare("SELECT password FROM users");
       $sql->execute(array($username));
       $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
