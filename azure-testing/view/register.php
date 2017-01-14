@@ -13,6 +13,8 @@
           echo "<div class = 'alert alert-success'>Account created! Please sign in.</div>";
         } else if ($_GET['status'] == "alreadyexists"){
           echo "<div class = 'alert alert-warning'>Username already exists</div>";
+        } else if ($_GET['status'] == "password"){
+          echo "<div class = 'alert alert-warning'>Passsword not secure enough. Please make password at least 8 characters long.</div>";
         }
         ?>
         <form action="createUser.php" method="post" autocomplete="off">

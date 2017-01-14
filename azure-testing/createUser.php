@@ -4,6 +4,10 @@
   $name = htmlspecialchars($_POST["name"]);
   $password = htmlspecialchars($_POST["password"]);
   $countResult = "";
+  if (strlen($password) < 8) {
+       header("Location: /?action=register&status=password");
+       exit();
+  }
 
   try{
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
@@ -22,7 +26,7 @@
       $sql = $conn->prepare("INSERT INTO users (name, password) VALUES (:name, :password)");
       $sql->bindParam(':name',$name);
       $sql->bindParam(':password',$password);
-      $sql->execute(); 
+      $sql->execute();
     }
     $conn = null;
   }catch(PDOException $e) {
