@@ -3,7 +3,7 @@
   session_start();
   $name = htmlspecialchars($_SESSION["name"]);
   if ((!isset($_SESSION['authorized']) || $_SESSION['authorized'] !== TRUE)) {
-       header('Location: http://localhost:8888/?action=login');
+       header('Location: /?action=login');
        exit();
   }
   $del_token = md5(uniqid(rand(), TRUE)); //creates csrf token
@@ -20,18 +20,6 @@
       <h4><a href='/?action=newsnippet'>Add Snippet</a> | <a href='/?action=allsnippets'>View All Snippets </a></h4>
       <div class="col-md-10 col-md-offset-1">
             <?php
-            $name = $_SESSION["name"];
-            $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-            if(!$conn){
-                die("Connection failed: ".mysqli_connect_error());
-            }
-            // $sql = "SELECT * FROM messages WHERE name = '$name'";
-            // $result = mysqli_query($conn, $sql);
-            $sql = $conn->prepare("SELECT * FROM messages WHERE name = ?");
-            $sql->bind_param('s', $name);
-            $sql->execute();
-            $result = $sql->get_result();
-
             if (mysqli_num_rows($result) > 0) {
               echo '<table class="table">
                 <thead>
