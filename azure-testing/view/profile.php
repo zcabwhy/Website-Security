@@ -1,6 +1,10 @@
 <?php
   include 'dbconnection.php';
   session_start();
+  if ((!isset($_SESSION['authorized']) || $_SESSION['authorized'] !== TRUE)) {
+       header('Location: http://localhost:8888/?action=login');
+       exit();
+  }
   $name = htmlspecialchars($_SESSION["name"]);
   $profileid = $_GET['uid'];
   if ($profileid == ''){
@@ -89,7 +93,7 @@
     </p>
 
 
-    <form action="changeSnippet.php" method="get">
+    <form action="changeSnippet.php" method="post">
       <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
       <!-- <input type="text" class="form-control" name="newName"><br> -->
       <input type="submit" class="btn btn-primary">
@@ -115,7 +119,7 @@
               }
             }
             echo "<h2>Administrator</h2>
-            <form action='makeadmin.php' method='get'>
+            <form action='makeadmin.php' method='post'>
               <fieldset id='group1'>
                 <label class='radio-inline'>
                   <input type='radio' name='optradio' value=1" . (($admin==1)?' checked':'') . ">Yes
@@ -128,7 +132,7 @@
             </form>
 
             <h2>Author</h2>
-            <form action='makeauthor.php' method='get'>
+            <form action='makeauthor.php' method='post'>
               <fieldset id='group2'>
                 <label class='radio-inline'>
                   <input type='radio' name='optradio' value=1" . (($author==1)?' checked':'') . ">Yes

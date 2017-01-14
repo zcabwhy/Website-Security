@@ -17,6 +17,7 @@
   if(checkPass($servername, $dbusername, $dbpassword, $dbname, $name, $password)){
     session_start();
     $_SESSION["name"] = $name;
+    $_SESSION["authorized"] = true;
     header("Location: /");
   }else{
     header("Location: /?action=login&status=badlogin");
