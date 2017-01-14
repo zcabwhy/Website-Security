@@ -4,8 +4,8 @@
   $name = $_SESSION["uid"];
   // $currentPassword = $_GET["currentURL"];
   // $newSnippet = $_GET["newSnippet"]; //insecure
-  $newSnippet = htmlspecialchars($newSnippet = $_GET["newSnippet"]);
-  if(!empty($_GET["newSnippet"])) {
+  $newSnippet = htmlspecialchars($newSnippet = $_POST["newSnippet"]);
+  if(!empty($_POST["newSnippet"])) {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

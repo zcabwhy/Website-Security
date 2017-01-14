@@ -2,6 +2,10 @@
   include 'dbconnection.php';
   session_start();
   $name = htmlspecialchars($_SESSION["name"]);
+  if ((!isset($_SESSION['authorized']) || $_SESSION['authorized'] !== TRUE)) {
+       header('Location: http://localhost:8888/?action=login');
+       exit();
+  }
 ?>
 <?php
   include_once('header.php');
