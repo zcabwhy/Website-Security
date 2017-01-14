@@ -12,6 +12,11 @@
     $_SESSION["uid"] = $name;
   }
   else $_SESSION["uid"] = $_GET['uid'];
+
+  $csrf_token = md5(uniqid(rand(), TRUE)); //creates csrf token
+  $_SESSION['csrf_token'] = $csrf_token;
+  $_SESSION['csrf_token_time'] = time();
+
 ?>
 <?php
   include_once('header.php');
@@ -53,6 +58,7 @@
     <h2>Change Username</h1>
     <form action="changename.php" method="post">
       <p><label> Current Username:</label><?php echo " $profileid"; ?></p>
+      <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
       <input type="text" class="form-control" name="newName"><br>
       <input type="submit" class="btn btn-primary">
     </form>
@@ -60,16 +66,19 @@
     <h2>Change Password</h2>
     <form action="changepassword.php" method="post">
       <label>Current Password</label>
+      <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
       <input type="password" class="form-control" name="currentPassword"><br>
       <label>New Password</label>
       <input type="password" class="form-control" name="newPassword"><br>
       <input type="submit" class="btn btn-primary">
+
     </form>
 
     <h2>Change Icon URL</h2>
 
     <form action="changeIconURL.php" method="post">
       <label>New Icon URL</label>
+      <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
       <input type="text" class="form-control" name="newURL"><br>
       <input type="submit" class="btn btn-primary">
     </form>
@@ -103,6 +112,7 @@
 
     <form action="changeSnippet.php" method="post">
       <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
+      <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
       <!-- <input type="text" class="form-control" name="newName"><br> -->
       <input type="submit" class="btn btn-primary">
     </form>
@@ -126,7 +136,7 @@
             $sql = $conn->prepare("SELECT admin, author FROM users WHERE name = ?");
             $sql->bind_param('s',$profileid);
             $sql->execute();
-            $result = $sql->get_result(); 
+            $result = $sql->get_result();
             if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)) {
                 $admin = $row['admin'];

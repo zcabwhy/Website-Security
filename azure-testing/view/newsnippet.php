@@ -10,7 +10,7 @@
     }
   }
 
-  $csrf_token = md5(uniqid(rand(), TRUE));
+  $csrf_token = md5(uniqid(rand(), TRUE)); //creates csrf token
   $_SESSION['csrf_token'] = $csrf_token;
   $_SESSION['csrf_token_time'] = time();
 

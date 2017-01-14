@@ -6,6 +6,9 @@
        header('Location: http://localhost:8888/?action=login');
        exit();
   }
+  $del_token = md5(uniqid(rand(), TRUE)); //creates csrf token
+  $_SESSION['del_token'] = $del_token;
+  $_SESSION['del_token_time'] = time();
 ?>
 <?php
   include_once('header.php');
@@ -43,7 +46,7 @@
                 if ($message == NULL){
                   $message = "<i>You haven't posted a snippet yet!</i>";
                 }
-                echo "<tr><td style='text-align:left;'>" . $row["message"] . "</td><td style='width: 175px;text-align:center;'><a href='deletesnippet.php?a=" . $row["ID"] . "'>[X]</a></td></tr>";
+                echo "<tr><td style='text-align:left;'>" . $row["message"] . "</td><td style='width: 175px;text-align:center;'><a href='deletesnippet.php?a=" . $row["ID"] . "&del_token=" . $del_token . "'>[X]</a></td></tr>";
               }
               echo "</tbody>
                 </table>";
