@@ -1,4 +1,7 @@
-<?php include_once('header.php');?>
+<?php 
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <div class="container-fluid text-center">
       <h1>Current Members</h1>

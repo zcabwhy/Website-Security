@@ -53,9 +53,34 @@
 
   //Redirtection
   session_start();
-  if(!empty($_SESSION["name"])){
-    header("Location: loggedIn.php");
-  }else{
-    header("Location: notLogged.php");
+
+  if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+  } else if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+  } else {
+    $action = 'index';
   }
+
+  switch ($action) {
+    case 'index':
+      if(!empty($_SESSION["name"])){
+        include "loggedIn.php";
+      } else {
+        include "notLogged.php";
+      }
+      break;
+    case 'allsnipets':
+      include "allsnipets.php";
+      break;
+    case 'snippets':
+      include "snippets.php";
+      break;
+    case 'fileupload':
+      include "fileupload.php";
+      break;
+  }
+
+
+
 ?>

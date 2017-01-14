@@ -1,4 +1,7 @@
-<?php include_once('header.php');?>
+<?php
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">

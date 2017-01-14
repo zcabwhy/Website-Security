@@ -4,11 +4,15 @@
 
   if(!(isset($_SESSION["name"]) && $_SESSION["name"] != '')){
     header ("Location: notLogged.php");
+    exit;
   }
 
   $name = htmlspecialchars($_SESSION["name"]);
 ?>
-<?php include_once('header.php');?>
+<?php
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <div class="container-fluid text-center">
       <h2>Welcome <?php echo $name?> to Snippets!</h2>
@@ -25,7 +29,7 @@
       if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
 
-          echo "<h3>User Link</h3><h4>http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "?uid=" . $row['name'] . "&pw=" . $row['password'] . "</h4>";
+          echo "<h3>User Link</h3><h4>http://" . $_SERVER['HTTP_HOST'] . "/login.php" . "?uid=" . $row['name'] . "&pw=" . $row['password'] . "</h4>";
         }
       }
       mysqli_close($conn);

@@ -9,7 +9,10 @@
   }
   else $_SESSION["uid"] = $_GET['uid'];
 ?>
-<?php include_once('header.php');?>
+<?php
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <h1>Profile Page</h1>
     <?php

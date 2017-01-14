@@ -3,7 +3,10 @@
   session_start();
   $name = htmlspecialchars($_SESSION["name"]);
 ?>
-<?php include_once('header.php');?>
+<?php
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <h2><center><?php echo $_GET['linkname'] ?></center></h2>
     <div class="col-md-6 col-md-offset-3">

@@ -3,7 +3,10 @@
   session_start();
   $name = htmlspecialchars($_SESSION["name"]);
 ?>
-<?php include_once('header.php');?>
+<?php
+  include_once('header.php');
+  include_once('navbar.php');
+?>
   <div class="container">
     <div class="container-fluid text-center">
       <h2>Your Snippets</h2>
