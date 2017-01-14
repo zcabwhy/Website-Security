@@ -4,6 +4,10 @@
   $name = htmlspecialchars($_SESSION["uid"]);
   $currentPassword = htmlspecialchars($_POST["currentPassword"]);
   $newPassword = htmlspecialchars($_POST["newPassword"]);
+  if (strlen($newPassword) < 8) {
+       header("Location: /?action=profile&status=failure&error= Password Must Be Longer Than 8 Characters");
+       exit();
+  }
   if(!empty($_POST["currentPassword"]) || !empty($_POST["newPassword"])) {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
