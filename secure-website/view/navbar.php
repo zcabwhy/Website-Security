@@ -7,25 +7,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">Snippets</a>
+      <a class="navbar-brand" href="/">Snippets</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
         <?php
           if(!(isset($_SESSION["name"]) && $_SESSION["name"] != '')){
-            echo "  <a href='signin.php'>Sign in</a>
+            echo "  <a href='/?action=login'>Sign in</a>
             </li>
             <li>
-              <a href='register.php'>Register</a>";
+              <a href='/?action=register'>Register</a>";
           } else {
-            echo "<a href='profile.php'>Logged in as " .$_SESSION['name'] . "</a>
+            echo "<a href='/?action=profile'>Logged in as " .$_SESSION['name'] . "</a>
           </li>
           <li>
-            <a href='snippets.php'>Snippets</a>
+            <a href='/?action=snippets'>Snippets</a>
           </li>
           <li>
-            <a href='fileupload.php'>Storage</a>
+            <a href='/?action=fileupload'>Storage</a>
           </li>
           <li>
             <a href='logOut.php'>Logout</a>";
