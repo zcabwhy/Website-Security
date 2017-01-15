@@ -14,9 +14,6 @@
   $_SESSION['csrf_token'] = $csrf_token;
   $_SESSION['csrf_token_time'] = time();
 
-  // echo "csrf token = " .$csrf_token;
-  // echo "session token = ". $_SESSION['csrf_token'];
-  // echo "session token time = ". $_SESSION['csrf_token_time'];
 ?>
 <?php
   include_once('header.php');
