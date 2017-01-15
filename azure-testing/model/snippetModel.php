@@ -1,6 +1,4 @@
 <?php
-include 'database.php';
-
   function get_sqldata($querytype){
     include 'dbconnection.php';
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
