@@ -104,18 +104,6 @@
     return $result;
   }
 
-  function get_sqldataprofile($name){
-    include 'dbconnection.php';
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $conn->prepare("SELECT iconURL , snippet FROM users WHERE name = :name");
-    $sql->bindParam(":name",$name);
-    $sql->execute();
-    $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-    $conn = null;
-    return $results;
-  }
-
   function get_md5password($uname){
     include 'dbconnection.php';
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
