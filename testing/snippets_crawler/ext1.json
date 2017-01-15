@@ -1,0 +1,20 @@
+[
+{"response url": "http://localhost:8888/notLogged.php"},
+{"links": ["<a href=\"signin.php\">Sign in</a>"]},
+{"links": ["<a href=\"register.php\">Register</a>"]},
+{"response url": "http://localhost:8888/register.php"},
+{"form url": "http://localhost:8888/register.php", "form destination: ": "createUser.php"},
+{"input: ": "<input type=\"text\" name=\"name\" class=\"form-control\" placeholder=\"Name\" required>"},
+{"input: ": "<input type=\"password\" name=\"password\" class=\"form-control\" placeholder=\"Password\" required>"},
+{"input: ": "<input type=\"submit\" class=\"btn btn-block btn-primary\">"},
+{"links": ["<a href=\"signin.php\">Sign in</a>"]},
+{"response url": "http://localhost:8888/userdetails.php?linkname=John"},
+{"links": ["<a href=\"signin.php\">Sign in</a>"]},
+{"links": ["<a href=\"register.php\">Register</a>"]},
+{"response url": "http://localhost:8888/signin.php"},
+{"form url": "http://localhost:8888/signin.php", "form destination: ": "login.php"},
+{"input: ": "<input type=\"text\" name=\"name\" class=\"form-control\" placeholder=\"Username\" required>"},
+{"input: ": "<input type=\"password\" name=\"password\" class=\"form-control\" placeholder=\"Password\" required>"},
+{"input: ": "<input type=\"submit\" class=\"btn btn-block btn-primary\">"},
+{"links": ["<a href=\"register.php\">Register</a>"]}
+]
