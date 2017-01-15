@@ -45,7 +45,9 @@
       break;
     case 'userdetails':
       if ($_GET['linkname'] != ''){
+        $result_validUser = get_user($_GET['linkname']);
         $result_snippets = get_snippets($_GET['linkname']);
+
       } else $result_snippets = get_snippets($_SESSION["name"]);
       include "view/userdetails.php";
       break;

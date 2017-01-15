@@ -104,6 +104,22 @@
     return $result;
   }
 
+  function get_user($name){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if(!$conn){
+        die("Connection failed: ".mysqli_connect_error());
+    }
+    session_start();
+    $sql = $conn->prepare("SELECT name FROM users WHERE name = ?");
+    $sql->bind_param('s', $name);
+    $sql->execute();
+    $result = $sql->get_result();
+    mysqli_close($conn);
+    return $result;
+  }
+
+
   function get_sqldataprofile($name){
     include 'dbconnection.php';
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
