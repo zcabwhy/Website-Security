@@ -1,5 +1,6 @@
 <?php
   include 'dbconnection.php';
+  include '../model/snippetModel.php';
   session_start();
   if ((!isset($_SESSION['authorized']) || $_SESSION['authorized'] !== TRUE)) {
        header('Location: /?action=login');
@@ -36,23 +37,12 @@
 
     <p>
       <?php
-      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      // echo "Connected successfully";
-      // $sql = "SELECT iconURL FROM users WHERE name='$profileid'";
-      $sql = $conn->prepare("SELECT iconURL FROM users WHERE name = :profileid");
-      $sql->bindParam(":profileid",$profileid);
-      $sql->execute();
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row) {
-            if ($row['iconURL'] != ''){
-              echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src={$row['iconURL']}/>";
-            }
+      foreach ($result_profile as $row) {
+        if ($row['iconURL'] != ''){
+          echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src='{$row['iconURL']}'/>";
         }
-      $conn = null;
-      // $name = "Icon URL";
-      // echo $name; ?>
+        }
+      ?>
     </p>
     <h2 style="text-align:center;"><?php echo "$profileid"; ?></h2>
     <h2>Change Username</h1>
@@ -94,15 +84,7 @@
     <h2>Change Private Snippet</h2>
 
     <p> <label>Current Private Snippet:</label> <?php
-      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      // $sql = "SELECT snippet FROM users WHERE name='$name'";
-      $sql = $conn->prepare("SELECT snippet FROM users WHERE name = :name");
-      $sql->bindParam(':name',$name);
-      $sql->execute();
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row) {
-            // print '<label>';
+      foreach ($result_profile as $row) {
             print $row['snippet'];
             // print '</label>';
         }
@@ -122,7 +104,6 @@
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
-      // $sql = "SELECT admin FROM users WHERE name = '" . $name . "'";
       $sql = $conn->prepare("SELECT admin FROM users WHERE name = ?");
       $sql->bind_param("s",$name);
       $sql->execute();

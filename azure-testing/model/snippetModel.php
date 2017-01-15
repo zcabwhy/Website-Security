@@ -81,7 +81,7 @@
         $result = $sql->get_result();
         break;
       case "allsnippets":
-        $sql = "SELECT * FROM messages";
+        $sql = "SELECT * FROM messages ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         break;
     }
@@ -102,6 +102,18 @@
     $result = $sql->get_result();
     mysqli_close($conn);
     return $result;
+  }
+
+  function get_sqldataprofile($name){
+    include 'dbconnection.php';
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT iconURL , snippet FROM users WHERE name = :name");
+    $sql->bindParam(":name",$name);
+    $sql->execute();
+    $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $results;
   }
 
   function get_md5password($uname){

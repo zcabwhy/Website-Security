@@ -37,6 +37,9 @@
       include "view/fileupload.php";
       break;
     case 'profile':
+      if ($_GET['uid'] != ''){
+        $result_profile = get_sqldataprofile($_GET['uid']);
+      } $result_profile = get_sqldataprofile($_SESSION["name"]);
       include "view/profile.php";
       break;
     case 'newsnippet':
