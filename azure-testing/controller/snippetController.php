@@ -37,6 +37,10 @@
       include "view/fileupload.php";
       break;
     case 'profile':
+    if ($_GET['uid'] != ''){
+      $result_profilestats = get_sqldataprofile($_GET['uid']);
+    } else $result_profilestats = get_sqldataprofile($_SESSION["name"]);
+      $result_userstats = get_sqldataprofile($_SESSION["name"]);
       include "view/profile.php";
       break;
     case 'newsnippet':
@@ -47,7 +51,6 @@
       if ($_GET['linkname'] != ''){
         $result_validUser = get_user($_GET['linkname']);
         $result_snippets = get_snippets($_GET['linkname']);
-
       } else $result_snippets = get_snippets($_SESSION["name"]);
       include "view/userdetails.php";
       break;

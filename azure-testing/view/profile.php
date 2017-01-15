@@ -36,23 +36,12 @@
 
     <p>
       <?php
-      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      // set the PDO error mode to exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      // echo "Connected successfully";
-      // $sql = "SELECT iconURL FROM users WHERE name='$profileid'";
-      $sql = $conn->prepare("SELECT iconURL FROM users WHERE name = :profileid");
-      $sql->bindParam(":profileid",$profileid);
-      $sql->execute();
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row) {
+      foreach ($result_profilestats as $row) {
             if ($row['iconURL'] != ''){
               echo "<img style='display: block; margin-left: auto; margin-right: auto;height:300px; width:300px;' src='{$row['iconURL']}'/>";
             }
         }
-      $conn = null;
-      // $name = "Icon URL";
-      // echo $name; ?>
+      $conn = null; ?>
     </p>
     <h2 style="text-align:center;"><?php echo "$profileid"; ?></h2>
     <h2>Change Username</h1>
@@ -94,14 +83,7 @@
     <h2>Change Private Snippet</h2>
 
     <p> <label>Current Private Snippet:</label> <?php
-      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      // $sql = "SELECT snippet FROM users WHERE name='$name'";
-      $sql = $conn->prepare("SELECT snippet FROM users WHERE name = :name");
-      $sql->bindParam(':name',$profileid);
-      $sql->execute();
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row) {
+      foreach ($result_profilestats as $row) {
             // print '<label>';
             print $row['snippet'];
             // print '</label>';
@@ -113,36 +95,19 @@
     <form action="changeSnippet.php" method="post">
       <label>New Snippet: </label><textarea name='newSnippet' rows='5' style='width:100%' class="form-control"></textarea><br>
       <input type="hidden" name = "csrf_form_token" value="<?php echo $csrf_token; ?>" />
-      <!-- <input type="text" class="form-control" name="newName"><br> -->
       <input type="submit" class="btn btn-primary">
     </form>
 
     <?php
-      $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-      if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-      }
-      // $sql = "SELECT admin FROM users WHERE name = '" . $name . "'";
-      $sql = $conn->prepare("SELECT admin FROM users WHERE name = ?");
-      $sql->bind_param("s",$name);
-      $sql->execute();
-      $result = $sql->get_result();
+      $result = $result_userstats;
 
       if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
           if ($row['admin'] == 1){
-            // $sql = "SELECT admin , author FROM users WHERE name = '" . $profileid . "'";
-            // $result = mysqli_query($conn, $sql);
-            $sql = $conn->prepare("SELECT admin, author FROM users WHERE name = ?");
-            $sql->bind_param('s',$profileid);
-            $sql->execute();
-            $result = $sql->get_result();
-            if (mysqli_num_rows($result) > 0) {
-              while($row = mysqli_fetch_assoc($result)) {
-                $admin = $row['admin'];
-                $author = $row['author'];
+            foreach ($result_profilestats as $row) {
+                  $admin = $row['admin'];
+                  $author = $row['author'];
               }
-            }
             echo "<h2>Administrator</h2>
             <form action='makeadmin.php' method='post'>
               <fieldset id='group1'>
