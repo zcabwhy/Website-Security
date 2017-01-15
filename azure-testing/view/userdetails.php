@@ -10,7 +10,7 @@
 ?>
   <div class="container">
     <div class="container-fluid text-center">
-      <h2><center><?php echo $_GET['linkname'] ?></center></h2>
+      <h2><center><?php echo htmlspecialchars($_GET['linkname']); ?></center></h2>
       <div class="col-md-6 col-md-offset-3">
 
 
