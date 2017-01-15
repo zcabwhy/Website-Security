@@ -44,4 +44,16 @@ require_once('database.php');
     return $result;
   }
 
+  function get_namepassword($username, $pw){
+    include 'dbconnection.php';
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT password FROM users WHERE name = :name");
+    $sql->bindParam(':name', $username);
+    $sql->execute();
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+  }
+
  ?>

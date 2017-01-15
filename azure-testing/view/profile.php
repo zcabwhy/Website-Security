@@ -2,7 +2,7 @@
   include 'dbconnection.php';
   session_start();
   if ((!isset($_SESSION['authorized']) || $_SESSION['authorized'] !== TRUE)) {
-       header('Location: http://localhost:8888/?action=login');
+       header('Location: /?action=login');
        exit();
   }
   $name = htmlspecialchars($_SESSION["name"]);

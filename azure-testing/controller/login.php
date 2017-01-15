@@ -1,5 +1,6 @@
 <?php
   include 'dbconnection.php';
+  include 'model/snippetModel.php';
 
   $uid = $_GET['uid'];
   $pw = $_GET['pw'];
@@ -25,14 +26,9 @@
 
   function checkPass($servername, $dbusername, $dbpassword, $dbname, $username, $pw){
     try{
-      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql = $conn->prepare("SELECT password FROM users WHERE name = :name");
-      $sql->bindParam(':name', $username);
-      $sql->execute(); 
-      $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-      foreach($rows as $row){
-        $cpass = $row["password"];
+      $results = get_namepassword($username, $pw);
+      foreach($results as $result){
+        $cpass = $result["password"];
         if(password_verify($pw, $cpass)){
           $conn = null;
           return TRUE;
