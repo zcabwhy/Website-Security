@@ -1,4 +1,58 @@
 <?php
+  function check_database(){
+    include 'dbconnection.php';
+    // Create database
+    $conn = new mysqli($servername, $dbusername, $dbpassword);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbname'";
+
+    // execute the statement
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 0) {
+      $sql = "CREATE DATABASE " . $dbname;
+      if ($conn->query($sql) === TRUE) {
+          //echo "Database created successfully";
+      } else {
+          //echo "Error creating database: " . $conn->error;
+      }
+      $conn->close();
+    } else {
+      //echo "Databse already exists";
+    }
+
+    //Create tables
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "CREATE TABLE users(
+      name varchar(32) PRIMARY KEY,
+      password varchar(255) default null,
+      iconURL varchar(500) default null,
+      snippet varchar(250) default null,
+      admin boolean not null default 0,
+      author boolean not null default 1
+    )";
+    if ($conn->query($sql) === TRUE) {
+        //echo "Table MyGuests created successfully";
+    } else {
+        //echo "Error creating table: " . $conn->error;
+    }
+    $sql = "CREATE TABLE messages(
+      ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      name varchar(32) default null,
+      message varchar(200) default null)";
+    if ($conn->query($sql) === TRUE) {
+        //echo "Table MyGuests created successfully";
+    } else {
+        //echo "Error creating table: " . $conn->error;
+    }
+    $conn->close();
+
+  }
+
   function get_sqldata($querytype){
     include 'dbconnection.php';
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
@@ -30,15 +84,22 @@
         $sql = "SELECT * FROM messages";
         $result = mysqli_query($conn, $sql);
         break;
-      case "snippets":
-        session_start();
-        $name = htmlspecialchars($_SESSION["name"]);
-        $sql = $conn->prepare("SELECT * FROM messages WHERE name = ?");
-        $sql->bind_param('s', $name);
-        $sql->execute();
-        $result = $sql->get_result();
-        break;
     }
+    mysqli_close($conn);
+    return $result;
+  }
+
+  function get_snippets($name){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if(!$conn){
+        die("Connection failed: ".mysqli_connect_error());
+    }
+    session_start();
+    $sql = $conn->prepare("SELECT message FROM messages WHERE name = ? ORDER BY id DESC");
+    $sql->bind_param('s', $name);
+    $sql->execute();
+    $result = $sql->get_result();
     mysqli_close($conn);
     return $result;
   }

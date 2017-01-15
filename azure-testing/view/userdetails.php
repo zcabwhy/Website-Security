@@ -18,26 +18,14 @@
         </thead>
         <tbody>
           <?php
-
-          $linkname = $_GET['linkname'];
-
-          $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-
-          if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-          }
-          $sql = "SELECT message FROM messages WHERE name = '" . $linkname . "' ORDER BY id DESC";
-          $result = mysqli_query($conn, $sql);
-
-          if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
+          if (mysqli_num_rows($result_snippets) > 0) {
+            while($row = mysqli_fetch_assoc($result_snippets)) {
               $linkname = $row['name'];
               echo "<tr><td style='text-align:left;'>" . $row["message"]. "</td></tr>";
             }
           } else {
             echo "<tr><td>The user has posted no snippets!</td></tr>";
           }
-          mysqli_close($conn);
           ?>
         </tbody>
       </table>

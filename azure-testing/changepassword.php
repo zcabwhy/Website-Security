@@ -19,12 +19,7 @@
     }
     if(!empty($_POST["currentPassword"]) || !empty($_POST["newPassword"])) {
       try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = $conn->prepare("SELECT password FROM users WHERE name = :name");
-        $sql->bindParam(':name', $name);
-        $sql->execute();
-        $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $rows = get_md5password($name);
         $found = FALSE;
         foreach($rows as $row){
           if(password_verify($currentPassword, $row["password"])){
