@@ -96,11 +96,39 @@
         die("Connection failed: ".mysqli_connect_error());
     }
     session_start();
-    $sql = $conn->prepare("SELECT message FROM messages WHERE name = ? ORDER BY id DESC");
+    $sql = $conn->prepare("SELECT ID , message FROM messages WHERE name = ? ORDER BY id DESC");
     $sql->bind_param('s', $name);
     $sql->execute();
     $result = $sql->get_result();
     mysqli_close($conn);
+    return $result;
+  }
+
+  function get_sqldataprofile($name){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql = $conn->prepare("SELECT iconURL, snippet FROM users WHERE name = ?");
+    $sql->bind_param('s',$name);
+    $sql->execute();
+    $result = $sql->get_result();
+    mysqli_close($conn);
+    return $result;
+  }
+
+  function get_sqldatarights($name){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error());
+    }
+    // $sql = "SELECT admin FROM users WHERE name = '" . $name . "'";
+    $sql = $conn->prepare("SELECT admin FROM users WHERE name = ?");
+    $sql->bind_param("s",$name);
+    $sql->execute();
+    $result = $sql->get_result();
     return $result;
   }
 
