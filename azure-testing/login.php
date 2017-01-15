@@ -26,15 +26,13 @@
 
   function checkPass($servername, $dbusername, $dbpassword, $dbname, $username, $pw){
     try{
-      $results = get_namepassword($username, $pw);
+      $results = get_md5password($username);
       foreach($results as $result){
         $cpass = $result["password"];
         if(password_verify($pw, $cpass)){
-          $conn = null;
           return TRUE;
         }
       }
-      $conn = null;
       return FALSE;
     }catch(PDOException $e) {
       return FALSE;

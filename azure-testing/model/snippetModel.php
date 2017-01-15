@@ -1,5 +1,5 @@
 <?php
-require_once('database.php');
+include 'database.php';
 
   function get_sqldata($querytype){
     include 'dbconnection.php';
@@ -38,22 +38,107 @@ require_once('database.php');
         $sql = $conn->prepare("SELECT * FROM messages WHERE name = ?");
         $sql->bind_param('s', $name);
         $sql->execute();
+        $result = $sql->get_result();
         break;
     }
     mysqli_close($conn);
     return $result;
   }
 
-  function get_namepassword($username, $pw){
+  function get_md5password($uname){
     include 'dbconnection.php';
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = $conn->prepare("SELECT password FROM users WHERE name = :name");
-    $sql->bindParam(':name', $username);
+    $sql->bindParam(':name', $uname);
     $sql->execute();
-    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $results = $sql->fetchAll(PDO::FETCH_ASSOC);
     $conn = null;
-    return $result;
+    return $results;
   }
 
+  function change_profilestatus($name , $newdata , $querytype){
+    include 'dbconnection.php';
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    switch ($querytype){
+      case "admin":
+        $sql = $conn->prepare("UPDATE users SET admin = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata',$newdata);
+        break;
+      case "author":
+        $sql = $conn->prepare("UPDATE users SET author = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata',$newdata);
+        break;
+      case "privatesnippet":
+        $sql = $conn->prepare("UPDATE users SET snippet = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata',$newdata);
+        break;
+      case "iconURL":
+        $sql = $conn->prepare("UPDATE users SET iconURL= :newdata WHERE name = :name");
+        $sql->bindParam(':newdata', $newdata);
+        break;
+      case "name":
+        $sql = $conn->prepare("UPDATE users SET name = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata',$newdata);
+        break;
+      case "messagename":
+        $sql = $conn->prepare("UPDATE messages SET name = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata', $newdata);
+        break;
+      case "password":
+        $sql = $conn->prepare("UPDATE users SET password = :newdata WHERE name = :name");
+        $sql->bindParam(':newdata', $newdata);
+        break;
+    }
+    $sql->bindParam(':name',$name);
+    $sql->execute();
+    $conn = null;
+  }
+
+  function create_snippet($name , $message){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if(!$conn){
+        die("Connection failed: ".mysqli_connect_error());
+    }
+    $temp = null;
+    $sql = $conn->prepare("INSERT INTO messages VALUES (?,?,?)");
+    $sql->bind_param("iss", $temp, $name, $message);
+    $sql->execute();
+    mysqli_close($conn);
+  }
+
+  function create_user($name , $hashedpassword){
+    include 'dbconnection.php';
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $conn->prepare("SELECT * FROM users WHERE name = :name");
+    $sql->bindParam(':name', $name);
+    $sql->execute();
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $countResult = count($result);
+    if($countResult == 0){
+      $sql = $conn->prepare("INSERT INTO users (name, password) VALUES (:name, :password)");
+      $sql->bindParam(':name',$name);
+      $sql->bindParam(':password',$hashedpassword);
+      $sql->execute();
+      $conn = null;
+      return 0; //User created successfuly
+    }
+    $conn = null;
+    return 1; //Already exists
+  }
+
+  function delete_snippet($snippetid){
+    include 'dbconnection.php';
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    if(!$conn){
+      die("Connection failed: ".mysqli_connect_error());
+    }
+    $sql = $conn->prepare("DELETE FROM messages WHERE ID = ?");
+    $sql->bind_param("i",$snippetid);
+    $sql->execute();
+    mysqli_close($conn);
+  }
  ?>

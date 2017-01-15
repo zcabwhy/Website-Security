@@ -20,7 +20,7 @@
       <h4><a href='/?action=newsnippet'>Add Snippet</a> | <a href='/?action=allsnippets'>View All Snippets </a></h4>
       <div class="col-md-10 col-md-offset-1">
             <?php
-            if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result_snippets) > 0) {
               echo '<table class="table">
                 <thead>
                   <tr>
@@ -29,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody>';
-              while($row = mysqli_fetch_assoc($result)) {
+              while($row = mysqli_fetch_assoc($result_snippets)) {
                 $message = $row['message'];
                 if ($message == NULL){
                   $message = "<i>You haven't posted a snippet yet!</i>";

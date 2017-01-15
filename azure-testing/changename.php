@@ -1,5 +1,6 @@
 <?php
   include 'dbconnection.php';
+  include 'model/snippetModel.php';
   session_start();
 
   if(!isset($_SESSION['csrf_token'])){
@@ -13,24 +14,9 @@
     if(!empty($_POST["newName"])) {
 
       try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // $sql = "UPDATE users SET name='$newName' WHERE name='$name'";
-        // $_SESSION["name"] = $newName;
-        // $stmt = $conn->prepare($sql);
-        // $stmt->execute();
-        // $sql = "UPDATE messages SET name='$newName' WHERE name='$name'";
-        // $stmt = $conn->prepare($sql);
-        // $stmt->execute();
-        $sql = $conn->prepare("UPDATE users SET name = :newName WHERE name = :name");
-        $sql->bindParam(':newName',$newName);
-        $sql->bindParam(':name',$name);
+        change_profilestatus($name , $newName , "name");
         $_SESSION["name"] = $newName;
-        $sql->execute();
-        $sql = $conn->prepare("UPDATE messages SET name = :newName WHERE name = :name");
-        $sql->bindParam(':newName', $newName);
-        $sql->bindParam(':name',$name);
-        $sql->execute();
+        change_profilestatus($name , $newName , "messagename");
         $dir = "uploads/" . $name;
         if (file_exists($dir)){
           rename("uploads/" . $name . "/" , "uploads/" . $newName . "/");
